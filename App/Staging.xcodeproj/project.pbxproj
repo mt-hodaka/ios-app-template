@@ -6,17 +6,61 @@
 	objectVersion = 52;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A5D068272695773B00F7B052 /* Linter */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A5D0682A2695773B00F7B052 /* Build configuration list for PBXAggregateTarget "Linter" */;
+			buildPhases = (
+				A59FBC4E26B5AF1800C4BD0C /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Linter;
+			productName = Linter;
+		};
+		A5D0682E2695881F00F7B052 /* Generator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A5D0682F2695881F00F7B052 /* Build configuration list for PBXAggregateTarget "Generator" */;
+			buildPhases = (
+				A59FBC4F26B5AF2500C4BD0C /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Generator;
+			productName = Generator;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
+		A52550432695E3B8004D3750 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A52550422695E3B8004D3750 /* Settings.bundle */; };
 		A52776B726583C29008B42E6 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A52776B626583C29008B42E6 /* AppFeature */; };
 		A52776B926584033008B42E6 /* env.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52776B826583FE6008B42E6 /* env.swift */; };
 		A5EB402A2657DCCB00825B30 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB40292657DCCB00825B30 /* App.swift */; };
 		A5EB402E2657DCCD00825B30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5EB402D2657DCCD00825B30 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A5D0682C2695776700F7B052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5EB401E2657DCCB00825B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5D068272695773B00F7B052;
+			remoteInfo = Linter;
+		};
+		A5D068332695886100F7B052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5EB401E2657DCCB00825B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5D0682E2695881F00F7B052;
+			remoteInfo = Generator;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		A520955B26B3E9280093E5A4 /* App-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "App-Base.xcconfig"; sourceTree = "<group>"; };
 		A520955C26B3EA270093E5A4 /* App-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "App-Debug.xcconfig"; sourceTree = "<group>"; };
 		A520955D26B3EA2F0093E5A4 /* App-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "App-Release.xcconfig"; sourceTree = "<group>"; };
+		A52550422695E3B8004D3750 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A52776B826583FE6008B42E6 /* env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = env.swift; sourceTree = "<group>"; };
 		A592C04726B401850019832F /* Project-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Base.xcconfig"; sourceTree = "<group>"; };
 		A592C04826B401980019832F /* Project-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Debug.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +107,7 @@
 				A520955B26B3E9280093E5A4 /* App-Base.xcconfig */,
 				A5EB40292657DCCB00825B30 /* App.swift */,
 				A5EB402D2657DCCD00825B30 /* Assets.xcassets */,
+				A52550422695E3B8004D3750 /* Settings.bundle */,
 				A5EB403B2657E12A00825B30 /* Env */,
 			);
 			path = iOS;
@@ -111,6 +156,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				A5D0682D2695776700F7B052 /* PBXTargetDependency */,
+				A5D068342695886100F7B052 /* PBXTargetDependency */,
 			);
 			name = "ios-app-template";
 			packageProductDependencies = (
@@ -129,6 +176,12 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					A5D068272695773B00F7B052 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					A5D0682E2695881F00F7B052 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					A5EB40252657DCCB00825B30 = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -148,6 +201,8 @@
 			projectRoot = "";
 			targets = (
 				A5EB40252657DCCB00825B30 /* ios-app-template */,
+				A5D068272695773B00F7B052 /* Linter */,
+				A5D0682E2695881F00F7B052 /* Generator */,
 			);
 		};
 /* End PBXProject section */
@@ -157,11 +212,49 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52550432695E3B8004D3750 /* Settings.bundle in Resources */,
 				A5EB402E2657DCCD00825B30 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A59FBC4E26B5AF1800C4BD0C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ${SRCROOT}/..\nmake lint\n";
+		};
+		A59FBC4F26B5AF2500C4BD0C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ${SRCROOT}/..\nmake generate-license\nmake generate-code\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A5EB40222657DCCB00825B30 /* Sources */ = {
@@ -175,7 +268,56 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A5D0682D2695776700F7B052 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5D068272695773B00F7B052 /* Linter */;
+			targetProxy = A5D0682C2695776700F7B052 /* PBXContainerItemProxy */;
+		};
+		A5D068342695886100F7B052 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5D0682E2695881F00F7B052 /* Generator */;
+			targetProxy = A5D068332695886100F7B052 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		A5D068282695773B00F7B052 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4NV8KK5CH4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A5D068292695773B00F7B052 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4NV8KK5CH4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A5D068302695881F00F7B052 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4NV8KK5CH4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A5D068312695881F00F7B052 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4NV8KK5CH4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		A5EB40332657DCCD00825B30 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A592C04826B401980019832F /* Project-Debug.xcconfig */;
@@ -207,6 +349,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A5D0682A2695773B00F7B052 /* Build configuration list for PBXAggregateTarget "Linter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5D068282695773B00F7B052 /* Debug */,
+				A5D068292695773B00F7B052 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5D0682F2695881F00F7B052 /* Build configuration list for PBXAggregateTarget "Generator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5D068302695881F00F7B052 /* Debug */,
+				A5D068312695881F00F7B052 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A5EB40212657DCCB00825B30 /* Build configuration list for PBXProject "Staging" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
