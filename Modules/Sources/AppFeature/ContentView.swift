@@ -1,3 +1,4 @@
+import FirebaseAnalytics
 import SwiftUI
 
 public struct ContentView: View {
@@ -7,8 +8,15 @@ public struct ContentView: View {
     }
 
     public var body: some View {
-        Text(env.message)
-            .padding()
+        VStack(spacing: 10.0) {
+            Text(env.message)
+            Button("Log event") {
+                Analytics.logEvent("Test log event", parameters: nil)
+            }
+            Button("Crash") {
+                fatalError()
+            }
+        }
     }
 }
 
