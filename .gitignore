@@ -94,3 +94,7 @@ iOSInjectionProject/
 com.mono0926.LicensePlist/
 com.mono0926.LicensePlist.latest_result.txt
 com.mono0926.LicensePlist.plist
+
+# bundler
+
+vendor/bundle/

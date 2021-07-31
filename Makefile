@@ -5,6 +5,9 @@ SWIFTGEN = ./BuildTools/_SwiftGen/.build/release/swiftgen
 SRCROOT = ./App
 
 bootstrap:
+	rbenv install --skip-existing $(shell cat ./.ruby-version)
+	rbenv exec gem install bundler
+	bundle install
 	$(MAKE) -j prepare-build-tools
 
 prepare-build-tools:
