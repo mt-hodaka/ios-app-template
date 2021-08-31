@@ -1,0 +1,140 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+default_platform(:ios)
+
+platform :ios do
+  before_all do |lane, options|
+    xcversion
+  end
+
+  lane :prepare_build_tools do |options|
+    options[:binary_paths].split(" ").each do |binary_path|
+      match = /(.+)\/\.build\/(release|debug)\/(.+)/.match(binary_path).to_a
+      package_path = match[1]
+      configuration = match[2]
+      product = match[3]
+
+      spm(
+        command: "build",
+        configuration: configuration,
+        package_path: "#{package_path} --product #{product}" # workaround: `--product` parameter is not implemented in the `spm` action.
+      )
+    end
+  end
+
+  lane :test do |options|
+    run_tests(
+      workspace: options[:workspace],
+      scheme: options[:scheme],
+      skip_slack: true
+    )
+  end
+
+  lane :deploy do |options|
+    app_store_connect_api_key
+
+    if is_ci? then
+      bundle_id = get_build_setting(
+        workspace: options[:workspace],
+        scheme: options[:scheme],
+        build_setting_key: "PRODUCT_BUNDLE_IDENTIFIER"
+      )
+
+      get_provisioning_profile(app_identifier: bundle_id)
+    end
+
+    build_app(
+      workspace: options[:workspace],
+      scheme: options[:scheme],
+      xcargs: "-allowProvisioningUpdates",
+      export_xcargs: "-allowProvisioningUpdates"
+    )
+
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  lane :current_version do |options|
+    version_number = version_number(info_plist_path: options[:info_plist_path])
+    build_number = build_number(info_plist_path: options[:info_plist_path])
+    UI.success "#{version_number} (#{build_number})"
+  end
+
+  lane :bump_version_number do |options|
+    info_plist_paths = options[:info_plist_paths].split(" ")
+    current_version_number = version_number(info_plist_path: info_plist_paths[0])
+    new_version_number = options[:version_number] || UI.input("Please enter new version number (current is #{current_version_number}):")
+
+    info_plist_paths.each do |path|
+      set_info_plist_value(
+        path: path,
+        key: "CFBundleShortVersionString",
+        value: new_version_number
+      )
+    end
+
+    current_version(info_plist_path: info_plist_paths[0])
+  end
+
+  lane :bump_build_number do |options|
+    info_plist_paths = options[:info_plist_paths].split(" ")
+
+    info_plist_paths.each do |path|
+      set_info_plist_value(
+        path: path,
+        key: "CFBundleVersion",
+        value: options[:build_number]
+      )
+    end
+
+    current_version(info_plist_path: info_plist_paths[0])
+  end
+
+  after_all do |lane, options|
+  end
+
+  error do |lane, exception, options|
+    return unless is_ci?
+
+    slack(
+      message: exception.message,
+      success: false
+    )
+  end
+
+  private_lane :version_number do |options|
+    get_info_plist_value(
+      path: options[:info_plist_path],
+      key: "CFBundleShortVersionString"
+    )
+  end
+
+  private_lane :build_number do |options|
+    get_info_plist_value(
+      path: options[:info_plist_path],
+      key: "CFBundleVersion"
+    )
+  end
+
+  private_lane :get_build_setting do |options|
+    build_settings = xcodebuild(
+      workspace: options[:workspace],
+      scheme: options[:scheme],
+      xcargs: "-showBuildSettings",
+      raw_buildlog: true
+    )
+
+    /#{options[:build_setting_key]} = (.+)/.match(build_settings).to_a[1]
+  end
+end
