@@ -40,6 +40,9 @@ check:
 		workspace:$(WORKSPACE) \
 		scheme:"$(TARGET_NAME) ($(firstword $(PROJECT_NAMES)))"
 
+report-coverage:
+	bash -c "bash <(curl -s https://codecov.io/bash) -J $(TARGET_NAME) -c"
+
 define DEPLOY
 deploy-$(1):
 	$(FASTLANE) deploy \

@@ -1,0 +1,3 @@
+ignore:
+  - ./App
+  - ./Modules/Tests
