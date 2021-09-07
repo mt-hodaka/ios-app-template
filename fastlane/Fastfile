@@ -36,6 +36,7 @@ platform :ios do
     run_tests(
       workspace: options[:workspace],
       scheme: options[:scheme],
+      cloned_source_packages_path: ENV["CLONED_SOURCE_PACKAGES_PATH"],
       skip_slack: true
     )
   end
@@ -56,6 +57,7 @@ platform :ios do
     build_app(
       workspace: options[:workspace],
       scheme: options[:scheme],
+      cloned_source_packages_path: ENV["CLONED_SOURCE_PACKAGES_PATH"],
       xcargs: "-allowProvisioningUpdates",
       export_xcargs: "-allowProvisioningUpdates"
     )
@@ -131,7 +133,7 @@ platform :ios do
     build_settings = xcodebuild(
       workspace: options[:workspace],
       scheme: options[:scheme],
-      xcargs: "-showBuildSettings",
+      xcargs: "-showBuildSettings -clonedSourcePackagesDirPath #{ENV["CLONED_SOURCE_PACKAGES_PATH"]}",
       raw_buildlog: true
     )
 

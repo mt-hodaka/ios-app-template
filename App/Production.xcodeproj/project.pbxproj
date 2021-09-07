@@ -243,7 +243,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+			shellScript = "if which ${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run > /dev/null; then\n    ${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\nelse\n    echo \"warning: Crashlytics/run not found\"\nfi\n";
 		};
 		A59FBC4E26B5AF1800C4BD0C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

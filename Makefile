@@ -1,4 +1,8 @@
 export FL_XCODE_VERSION = $(shell cat ./.xcode-version)
+ifdef CI
+	export FASTLANE_HIDE_TIMESTAMP = true
+	export CLONED_SOURCE_PACKAGES_PATH = ~/Library/Caches/SourcePackages
+endif
 
 FASTLANE = bundle exec fastlane
 LICENSEPLIST = ./BuildTools/_LicensePlist/.build/release/license-plist
@@ -12,11 +16,14 @@ PROJECTS = $(wildcard $(SRCROOT)/*.xcodeproj)
 PROJECT_NAMES = $(basename $(notdir $(PROJECTS)))
 INFO_PLIST_FILE_PATHS = $(patsubst %,$(SRCROOT)/iOS/%/Info.plist,$(PROJECT_NAMES))
 
-bootstrap:
+bootstrap: prepare-gems prepare-build-tools
+
+prepare-gems:
+ifndef CI
 	rbenv install --skip-existing $(shell cat ./.ruby-version)
 	rbenv exec gem install bundler
+endif
 	bundle install
-	@$(MAKE) -j prepare-build-tools
 
 prepare-build-tools:
 	$(FASTLANE) prepare_build_tools \
