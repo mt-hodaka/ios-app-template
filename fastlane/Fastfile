@@ -52,14 +52,22 @@ platform :ios do
       )
 
       get_provisioning_profile(app_identifier: bundle_id)
+
+      skip_codesigning = true
+      export_team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+    else
+      xcargs = "-allowProvisioningUpdates"
+      export_xcargs = "-allowProvisioningUpdates"
     end
 
     build_app(
       workspace: options[:workspace],
       scheme: options[:scheme],
       cloned_source_packages_path: ENV["CLONED_SOURCE_PACKAGES_PATH"],
-      xcargs: "-allowProvisioningUpdates",
-      export_xcargs: "-allowProvisioningUpdates"
+      skip_codesigning: skip_codesigning,
+      export_team_id: export_team_id,
+      xcargs: xcargs,
+      export_xcargs: export_xcargs
     )
 
     upload_to_testflight(
@@ -130,10 +138,13 @@ platform :ios do
   end
 
   private_lane :get_build_setting do |options|
+    xcargs = ["-showBuildSettings"]
+    xcargs.concat ["-clonedSourcePackagesDirPath", ENV["CLONED_SOURCE_PACKAGES_PATH"]] unless ENV["CLONED_SOURCE_PACKAGES_PATH"].nil?
+
     build_settings = xcodebuild(
       workspace: options[:workspace],
       scheme: options[:scheme],
-      xcargs: "-showBuildSettings -clonedSourcePackagesDirPath #{ENV["CLONED_SOURCE_PACKAGES_PATH"]}",
+      xcargs: xcargs.join(" "),
       raw_buildlog: true
     )
 
