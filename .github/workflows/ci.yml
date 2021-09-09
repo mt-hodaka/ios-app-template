@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - README.md
+      - LICENSE
+  pull_request:
+    paths-ignore:
+      - README.md
+      - LICENSE
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: SwiftLint
+        uses: norio-nomura/action-swiftlint@3.2.1
+        env:
+          DIFF_BASE: ${{ github.base_ref }}
+
+  check:
+    runs-on: macos-11
+    timeout-minutes: 30
+    env:
+      SLACK_URL: ${{ secrets.SLACK_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache Gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+
+      - name: Cache Build Tools
+        id: cache-build-tools
+        uses: actions/cache@v2
+        with:
+          path: BuildTools/**/.build
+          key: ${{ runner.os }}-build-tools-${{ hashFiles('BuildTools/**/Package.resolved') }}
+
+      - name: Cache Swift Packages
+        uses: actions/cache@v2
+        with:
+          path: ~/Library/Caches/SourcePackages
+          key: ${{ runner.os }}-spm-${{ hashFiles('ios-app-template.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
+
+      - name: Prepare Gems
+        run: make prepare-gems
+
+      - name: Prepare Build Tools
+        if: steps.cache-build-tools.outputs.cache-hit != 'true'
+        run: make prepare-build-tools
+
+      - name: Check
+        run: make check
+
+      - name: Report Coverage
+        run: make report-coverage
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
