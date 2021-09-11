@@ -5,9 +5,9 @@ ifdef CI
 endif
 
 FASTLANE = bundle exec fastlane
-LICENSEPLIST = ./BuildTools/_LicensePlist/.build/release/license-plist
-SWIFTLINT = ./BuildTools/_SwiftLint/.build/release/swiftlint
-SWIFTGEN = ./BuildTools/_SwiftGen/.build/release/swiftgen
+LICENSEPLIST = ./BuildTools/.build/release/license-plist
+SWIFTLINT = ./BuildTools/.build/release/swiftlint
+SWIFTGEN = ./BuildTools/.build/release/swiftgen
 
 SRCROOT = ./App
 TARGET_NAME = ios-app-template
