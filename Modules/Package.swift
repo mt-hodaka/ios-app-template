@@ -20,6 +20,7 @@ let package = Package(
             dependencies: [
                 .product(name: "FirebaseAnalytics", package: "Firebase"),
                 .product(name: "FirebaseCrashlytics", package: "Firebase"),
+                .product(name: "FirebasePerformance", package: "Firebase"),
             ]),
         .testTarget(
             name: "AppFeatureTests",
