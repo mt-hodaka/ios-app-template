@@ -12,7 +12,7 @@ let package = Package(
         .library(name: "AppFeature", targets: ["AppFeature"]),
     ],
     dependencies: [
-        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "8.0.0")),
+        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git", from: "8.0.0"),
     ],
     targets: [
         .target(
@@ -20,6 +20,7 @@ let package = Package(
             dependencies: [
                 .product(name: "FirebaseAnalytics", package: "Firebase"),
                 .product(name: "FirebaseCrashlytics", package: "Firebase"),
+                .product(name: "FirebasePerformance", package: "Firebase"),
             ]),
         .testTarget(
             name: "AppFeatureTests",
