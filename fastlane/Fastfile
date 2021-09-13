@@ -51,7 +51,9 @@ platform :ios do
         build_setting_key: "PRODUCT_BUNDLE_IDENTIFIER"
       )
 
-      get_provisioning_profile(app_identifier: bundle_id)
+      retry_on_error do
+        get_provisioning_profile(app_identifier: bundle_id)
+      end
 
       skip_codesigning = true
       export_team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
@@ -149,5 +151,16 @@ platform :ios do
     )
 
     /#{options[:build_setting_key]} = (.+)/.match(build_settings).to_a[1]
+  end
+
+  def retry_on_error(times: 3)
+    try = 0
+    begin
+      try += 1
+      yield
+    rescue
+      retry if try < times
+      raise
+    end
   end
 end
