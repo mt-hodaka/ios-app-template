@@ -18,12 +18,23 @@ INFO_PLIST_FILE_PATHS = $(patsubst %,$(SRCROOT)/iOS/%/Info.plist,$(PROJECT_NAMES
 
 bootstrap: prepare-gems prepare-build-tools
 
+clean: clean-gems
+
 prepare-gems:
 ifndef CI
 	rbenv install --skip-existing $(shell cat ./.ruby-version)
 	rbenv exec gem install bundler
 endif
 	bundle install
+
+update-gems:
+ifndef CI
+	rbenv exec gem update bundler
+endif
+	bundle update --bundler
+
+clean-gems:
+	rm -rf ./vendor/bundle
 
 prepare-build-tools:
 	$(FASTLANE) prepare_build_tools \
