@@ -5,9 +5,10 @@ ifdef CI
 endif
 
 FASTLANE = bundle exec fastlane
-LICENSEPLIST = ./BuildTools/.build/release/license-plist
-SWIFTLINT = ./BuildTools/.build/release/swiftlint
-SWIFTGEN = ./BuildTools/.build/release/swiftgen
+BUILDTOOLS_PATH = ./BuildTools
+LICENSEPLIST = $(BUILDTOOLS_PATH)/.build/release/license-plist
+SWIFTLINT = $(BUILDTOOLS_PATH)/.build/release/swiftlint
+SWIFTGEN = $(BUILDTOOLS_PATH)/.build/release/swiftgen
 
 SRCROOT = ./App
 TARGET_NAME = ios-app-template
@@ -18,7 +19,7 @@ INFO_PLIST_FILE_PATHS = $(patsubst %,$(SRCROOT)/iOS/%/Info.plist,$(PROJECT_NAMES
 
 bootstrap: prepare-gems prepare-build-tools
 
-clean: clean-gems
+clean: clean-gems clean-build-tools
 
 prepare-gems:
 ifndef CI
@@ -39,6 +40,13 @@ clean-gems:
 prepare-build-tools:
 	$(FASTLANE) prepare_build_tools \
 		binary_paths:"$(LICENSEPLIST) $(SWIFTLINT) $(SWIFTGEN)"
+
+update-build-tools:
+	swift package update --package-path $(BUILDTOOLS_PATH)
+	@$(MAKE) prepare-build-tools
+
+clean-build-tools:
+	swift package reset --package-path $(BUILDTOOLS_PATH)
 
 lint:
 	$(SWIFTLINT) --fix --format
