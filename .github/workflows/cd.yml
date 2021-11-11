@@ -39,12 +39,6 @@ jobs:
         with:
           fetch-depth: 0 # fetch all history because bump build number does not work
 
-      - name: Cache Gems
-        uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-
       - name: Cache Build Tools
         id: cache-build-tools
         uses: actions/cache@v2
@@ -59,7 +53,9 @@ jobs:
           key: ${{ runner.os }}-spm-${{ hashFiles('ios-app-template.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
 
       - name: Prepare Gems
-        run: make prepare-gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
       - name: Prepare Build Tools
         if: steps.cache-build-tools.outputs.cache-hit != 'true'
@@ -109,12 +105,6 @@ jobs:
         with:
           fetch-depth: 0 # fetch all history because bump build number does not work
 
-      - name: Cache Gems
-        uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-
       - name: Cache Build Tools
         id: cache-build-tools
         uses: actions/cache@v2
@@ -129,7 +119,9 @@ jobs:
           key: ${{ runner.os }}-spm-${{ hashFiles('ios-app-template.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
 
       - name: Prepare Gems
-        run: make prepare-gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
       - name: Prepare Build Tools
         if: steps.cache-build-tools.outputs.cache-hit != 'true'
