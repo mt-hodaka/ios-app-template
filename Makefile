@@ -27,7 +27,7 @@ ifndef CI
 	rbenv install --skip-existing $(shell cat ./.ruby-version)
 	rbenv exec gem install bundler
 endif
-	bundle install
+	bundle check || bundle install
 
 update-gems:
 ifndef CI
