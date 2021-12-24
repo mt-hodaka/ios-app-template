@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/shibapm/Komondor.git",
         "state": {
           "branch": null,
-          "revision": "7c3c6040c01c99b83afc7eaa8f2a8a69337f659a",
-          "version": "1.1.1"
+          "revision": "90b087b1e39069684b1ff4bf915c2aae594f2d60",
+          "version": "1.1.3"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/mono0926/LicensePlist.git",
         "state": {
           "branch": null,
-          "revision": "b81d514123ca7a669c0d5d3f68109600573075c1",
-          "version": "3.14.2"
+          "revision": "333c73584579c672c2171d7b4c44115074f06fc5",
+          "version": "3.16.0"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/shibapm/PackageConfig.git",
         "state": {
           "branch": null,
-          "revision": "8a390979f64d0447ecd78abba4786db0d96ff568",
-          "version": "1.0.1"
+          "revision": "7081db0a7ad0ce6002115944c26c915167dc0617",
+          "version": "1.1.2"
         }
       },
       {
@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/jpsim/SourceKitten.git",
         "state": {
           "branch": null,
-          "revision": "7f4be006fe73211b0fd9666c73dc2f2303ffa756",
-          "version": "0.31.0"
+          "revision": "558628392eb31d37cb251cfe626c53eafd330df6",
+          "version": "0.31.1"
         }
       },
       {
@@ -114,8 +114,8 @@
         "repositoryURL": "https://github.com/kylef/Stencil.git",
         "state": {
           "branch": null,
-          "revision": "973e190edf5d09274e4a6bc2e636c86899ed84c3",
-          "version": "0.14.1"
+          "revision": "ccd9402682f4c07dac9561befd207c8156e80e20",
+          "version": "0.14.2"
         }
       },
       {
@@ -132,8 +132,8 @@
         "repositoryURL": "https://github.com/apple/swift-argument-parser.git",
         "state": {
           "branch": null,
-          "revision": "9564d61b08a5335ae0a36f789a7d71493eacadfc",
-          "version": "0.3.2"
+          "revision": "e1465042f195f374b94f915ba8ca49de24300a0d",
+          "version": "1.0.2"
         }
       },
       {
@@ -168,8 +168,8 @@
         "repositoryURL": "https://github.com/realm/SwiftLint.git",
         "state": {
           "branch": null,
-          "revision": "e820e750b08bd67bc9d98f4817868e9bc3d5d865",
-          "version": "0.44.0"
+          "revision": "95349376fdba465a6cd1b21b4ea65ffd5fdb14b4",
+          "version": "0.45.1"
         }
       },
       {

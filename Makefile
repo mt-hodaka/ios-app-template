@@ -32,7 +32,7 @@ update-gems:
 ifndef CI
 	rbenv exec gem update bundler
 endif
-	bundle update --bundler
+	bundle update
 
 clean-gems:
 	rm -rf ./vendor/bundle
