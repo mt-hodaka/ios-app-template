@@ -15,10 +15,10 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios prepare_build_tools
+### ios prepare_build_tool
 
 ```sh
-[bundle exec] fastlane ios prepare_build_tools
+[bundle exec] fastlane ios prepare_build_tool
 ```
 
 

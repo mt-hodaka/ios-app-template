@@ -6,9 +6,10 @@ endif
 
 FASTLANE = bundle exec fastlane
 BUILDTOOLS_PATH = ./BuildTools
-LICENSEPLIST = $(BUILDTOOLS_PATH)/.build/release/license-plist
-SWIFTLINT = $(BUILDTOOLS_PATH)/.build/release/swiftlint
-SWIFTGEN = $(BUILDTOOLS_PATH)/.build/release/swiftgen
+BUILDTOOLS_CONFIGURATION = release
+LICENSEPLIST = $(BUILDTOOLS_PATH)/.build/$(BUILDTOOLS_CONFIGURATION)/license-plist
+SWIFTLINT = $(BUILDTOOLS_PATH)/.build/$(BUILDTOOLS_CONFIGURATION)/swiftlint
+SWIFTGEN = $(BUILDTOOLS_PATH)/.build/$(BUILDTOOLS_CONFIGURATION)/swiftgen
 
 SRCROOT = ./App
 TARGET_NAME = ios-app-template
@@ -38,8 +39,9 @@ clean-gems:
 	rm -rf ./vendor/bundle
 
 prepare-build-tools:
-	$(FASTLANE) prepare_build_tools \
-		binary_paths:"$(LICENSEPLIST) $(SWIFTLINT) $(SWIFTGEN)"
+	$(FASTLANE) prepare_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(LICENSEPLIST)) configuration:$(BUILDTOOLS_CONFIGURATION)
+	$(FASTLANE) prepare_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(SWIFTGEN)) configuration:$(BUILDTOOLS_CONFIGURATION)
+	$(FASTLANE) prepare_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(SWIFTLINT)) configuration:$(BUILDTOOLS_CONFIGURATION)
 
 update-build-tools:
 	swift package update --package-path $(BUILDTOOLS_PATH)

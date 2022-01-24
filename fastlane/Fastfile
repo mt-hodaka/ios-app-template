@@ -17,19 +17,12 @@ platform :ios do
     xcversion
   end
 
-  lane :prepare_build_tools do |options|
-    options[:binary_paths].split(" ").each do |binary_path|
-      match = /(.+)\/\.build\/(release|debug)\/(.+)/.match(binary_path).to_a
-      package_path = match[1]
-      configuration = match[2]
-      product = match[3]
-
-      spm(
-        command: "build",
-        configuration: configuration,
-        package_path: "#{package_path} --product #{product}" # workaround: `--product` parameter is not implemented in the `spm` action.
-      )
-    end
+  lane :prepare_build_tool do |options|
+    spm(
+      command: "build",
+      configuration: options[:configuration],
+      package_path: "#{options[:package_path]} --product #{options[:product]}" # workaround: `--product` parameter is not implemented in the `spm` action.
+    )
   end
 
   lane :test do |options|
