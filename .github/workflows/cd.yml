@@ -50,7 +50,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: BuildTools/**/.build
-          key: ${{ runner.os }}-build-tools-${{ hashFiles('BuildTools/**/Package.resolved') }}
+          key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version', 'BuildTools/**/Package.resolved') }}
 
       - name: Cache Swift Packages
         uses: actions/cache@v2
@@ -120,7 +120,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: BuildTools/**/.build
-          key: ${{ runner.os }}-build-tools-${{ hashFiles('BuildTools/**/Package.resolved') }}
+          key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version', 'BuildTools/**/Package.resolved') }}
 
       - name: Cache Swift Packages
         uses: actions/cache@v2
