@@ -36,7 +36,7 @@ platform :ios do
 
   lane :install_certificate do
     if is_ci? then
-      setup_ci
+      create_keychain
       import_certificate(
         certificate_path: ENV["CERTIFICATE_PATH"],
         certificate_password: ENV["CERTIFICATE_PASSWORD"]
