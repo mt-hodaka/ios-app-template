@@ -71,6 +71,9 @@ check:
 report-coverage:
 	bash -c "bash <(curl -s https://codecov.io/bash) -J $(TARGET_NAME) -c"
 
+install-certificate:
+	$(FASTLANE) install_certificate
+
 define DEPLOY
 deploy-$(1):
 	$(FASTLANE) deploy \
