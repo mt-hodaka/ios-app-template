@@ -34,31 +34,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache Gems
-        uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-
-      - name: Cache Build Tools
-        id: cache-build-tools
-        uses: actions/cache@v2
-        with:
-          path: BuildTools/**/.build
-          key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version', 'BuildTools/**/Package.resolved') }}
-
-      - name: Cache Swift Packages
-        uses: actions/cache@v2
-        with:
-          path: ~/Library/Caches/SourcePackages
-          key: ${{ runner.os }}-spm-${{ hashFiles('ios-app-template.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-
-      - name: Prepare Gems
-        run: make prepare-gems
-
-      - name: Prepare Build Tools
-        if: steps.cache-build-tools.outputs.cache-hit != 'true'
-        run: make prepare-build-tools
+      - name: Bootstrap
+        uses: ./.github/actions/bootstrap
 
       - name: Check
         run: make check
