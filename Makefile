@@ -1,7 +1,7 @@
 export FL_XCODE_VERSION = $(shell cat ./.xcode-version)
 ifdef CI
-	export FASTLANE_HIDE_TIMESTAMP = true
-	export CLONED_SOURCE_PACKAGES_PATH = ~/Library/Caches/SourcePackages
+export FASTLANE_HIDE_TIMESTAMP = true
+export CLONED_SOURCE_PACKAGES_PATH = ~/Library/Caches/SourcePackages
 endif
 
 FASTLANE = bundle exec fastlane
@@ -98,9 +98,9 @@ endif
 
 bump-build-number:
 ifdef BUILD_NUMBER
-	$(FASTLANE) \
+	$(FASTLANE) bump_build_number \
 		info_plist_paths:"$(INFO_PLIST_FILE_PATHS)" \
-		bump_build_number build_number:$(BUILD_NUMBER)
+		build_number:$(BUILD_NUMBER)
 else
 	$(FASTLANE) bump_build_number \
 		info_plist_paths:"$(INFO_PLIST_FILE_PATHS)" \
