@@ -18,9 +18,9 @@ PROJECTS = $(wildcard $(SRCROOT)/*.xcodeproj)
 PROJECT_NAMES = $(basename $(notdir $(PROJECTS)))
 INFO_PLIST_FILE_PATHS = $(patsubst %,$(SRCROOT)/iOS/%/Info.plist,$(PROJECT_NAMES))
 
-bootstrap: prepare-gems prepare-build-tools
+bootstrap: prepare-gems prepare-build-tools resolve-dependencies
 
-clean: clean-gems clean-build-tools
+clean: clean-derived-data clean-build-tools clean-gems
 
 prepare-gems:
 ifndef CI
@@ -49,6 +49,16 @@ update-build-tools:
 
 clean-build-tools:
 	swift package reset --package-path $(BUILDTOOLS_PATH)
+
+resolve-dependencies:
+	$(FASTLANE) resolve_dependencies \
+		workspace:$(WORKSPACE) \
+		scheme:"$(TARGET_NAME) ($(firstword $(PROJECT_NAMES)))"
+
+update-dependencies: clean-derived-data
+	rm $(WORKSPACE)/xcshareddata/swiftpm/Package.resolved
+	@$(MAKE) resolve-dependencies
+	@$(MAKE) generate-license
 
 lint:
 	$(SWIFTLINT) --fix --format
@@ -81,6 +91,9 @@ endef
 $(foreach project,$(PROJECT_NAMES),$(eval $(call DEPLOY,$(project))))
 
 deploy-all: $(addprefix deploy-,$(PROJECT_NAMES))
+
+clean-derived-data:
+	rm -rf ~/Library/Developer/Xcode/DerivedData/$(TARGET_NAME)-*
 
 current-version:
 	$(FASTLANE) current_version \
