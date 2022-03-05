@@ -25,6 +25,18 @@ platform :ios do
     )
   end
 
+  lane :resolve_dependencies do |options|
+    xcargs = ["-resolvePackageDependencies"]
+    xcargs.concat ["-clonedSourcePackagesDirPath", ENV["CLONED_SOURCE_PACKAGES_PATH"]] unless ENV["CLONED_SOURCE_PACKAGES_PATH"].nil?
+
+    xcodebuild(
+      workspace: options[:workspace],
+      scheme: options[:scheme],
+      xcargs: xcargs.join(" "),
+      raw_buildlog: true
+    )
+  end
+
   lane :test do |options|
     run_tests(
       workspace: options[:workspace],
