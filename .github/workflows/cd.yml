@@ -10,133 +10,35 @@ on:
 
 jobs:
   deploy-staging:
-    runs-on: macos-11
-    timeout-minutes: 30
-    env:
-      SLACK_URL: ${{ secrets.SLACK_URL }}
-    steps:
-      # [Installing an Apple certificate on macOS runners for Xcode development - GitHub Docs](https://docs.github.com/en/actions/guides/installing-an-apple-certificate-on-macos-runners-for-xcode-development#creating-secrets-for-your-certificate-and-provisioning-profile)
-      - name: Install the Distribution certificate
-        env:
-          DISTRIBUTION_CERTIFICATE_BASE64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
-          DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
-          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-        run: |
-          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-
-          echo -n "$DISTRIBUTION_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
-
-          security create-keychain -p $KEYCHAIN_PASSWORD $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p $KEYCHAIN_PASSWORD $KEYCHAIN_PATH
-
-          security import $CERTIFICATE_PATH -P $DISTRIBUTION_CERTIFICATE_PASSWORD -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-          security list-keychain -d user -s $KEYCHAIN_PATH
-
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # fetch all history because bump build number does not work
-
-      - name: Cache Build Tools
-        id: cache-build-tools
-        uses: actions/cache@v2
-        with:
-          path: BuildTools/**/.build
-          key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version', 'BuildTools/**/Package.resolved') }}
-
-      - name: Cache Swift Packages
-        uses: actions/cache@v2
-        with:
-          path: ~/Library/Caches/SourcePackages
-          key: ${{ runner.os }}-spm-${{ hashFiles('ios-app-template.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-
-      - name: Prepare Gems
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - name: Prepare Build Tools
-        if: steps.cache-build-tools.outputs.cache-hit != 'true'
-        run: make prepare-build-tools
-
-      - name: Bump Build Number
-        run: make bump-build-number
-
-      - name: Deploy Staging
-        run: make deploy-Staging
-        env:
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
-          TEAM_ID: ${{ secrets.TEAM_ID }}
-          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
-          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
-          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
-          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+    uses: ./.github/workflows/deploy.yml
+    with:
+      deploy-make-target: deploy-Staging
+    secrets:
+      slack-url: ${{ secrets.SLACK_URL }}
+      distribution-certificate-base64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
+      distribution-certificate-password: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
+      keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
+      apple-id: ${{ secrets.APPLE_ID }}
+      itc-team-id: ${{ secrets.ITC_TEAM_ID }}
+      team-id: ${{ secrets.TEAM_ID }}
+      fastlane-apple-application-specific-password: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+      app-store-connect-api-key-key-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+      app-store-connect-api-key-issuer-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+      app-store-connect-api-key-key: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
 
   deploy-production:
-    runs-on: macos-11
-    timeout-minutes: 30
-    env:
-      SLACK_URL: ${{ secrets.SLACK_URL }}
-    steps:
-      # [Installing an Apple certificate on macOS runners for Xcode development - GitHub Docs](https://docs.github.com/en/actions/guides/installing-an-apple-certificate-on-macos-runners-for-xcode-development#creating-secrets-for-your-certificate-and-provisioning-profile)
-      - name: Install the Distribution certificate
-        env:
-          DISTRIBUTION_CERTIFICATE_BASE64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
-          DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
-          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-        run: |
-          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-
-          echo -n "$DISTRIBUTION_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
-
-          security create-keychain -p $KEYCHAIN_PASSWORD $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p $KEYCHAIN_PASSWORD $KEYCHAIN_PATH
-
-          security import $CERTIFICATE_PATH -P $DISTRIBUTION_CERTIFICATE_PASSWORD -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-          security list-keychain -d user -s $KEYCHAIN_PATH
-
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # fetch all history because bump build number does not work
-
-      - name: Cache Build Tools
-        id: cache-build-tools
-        uses: actions/cache@v2
-        with:
-          path: BuildTools/**/.build
-          key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version', 'BuildTools/**/Package.resolved') }}
-
-      - name: Cache Swift Packages
-        uses: actions/cache@v2
-        with:
-          path: ~/Library/Caches/SourcePackages
-          key: ${{ runner.os }}-spm-${{ hashFiles('ios-app-template.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-
-      - name: Prepare Gems
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - name: Prepare Build Tools
-        if: steps.cache-build-tools.outputs.cache-hit != 'true'
-        run: make prepare-build-tools
-
-      - name: Bump Build Number
-        run: make bump-build-number
-
-      - name: Deploy Production
-        run: make deploy-Production
-        env:
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
-          TEAM_ID: ${{ secrets.TEAM_ID }}
-          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
-          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
-          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
-          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+    uses: ./.github/workflows/deploy.yml
+    with:
+      deploy-make-target: deploy-Production
+    secrets:
+      slack-url: ${{ secrets.SLACK_URL }}
+      distribution-certificate-base64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
+      distribution-certificate-password: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
+      keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
+      apple-id: ${{ secrets.APPLE_ID }}
+      itc-team-id: ${{ secrets.ITC_TEAM_ID }}
+      team-id: ${{ secrets.TEAM_ID }}
+      fastlane-apple-application-specific-password: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+      app-store-connect-api-key-key-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+      app-store-connect-api-key-issuer-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+      app-store-connect-api-key-key: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
