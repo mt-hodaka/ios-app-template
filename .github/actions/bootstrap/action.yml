@@ -1,0 +1,28 @@
+name: 'Bootstrap'
+description: 'Set up build requirements'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Cache Build Tools
+      id: cache-build-tools
+      uses: actions/cache@v2
+      with:
+        path: BuildTools/**/.build
+        key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version', 'BuildTools/**/Package.resolved') }}
+
+    - name: Cache Swift Packages
+      uses: actions/cache@v2
+      with:
+        path: ~/Library/Caches/SourcePackages
+        key: ${{ runner.os }}-spm-${{ hashFiles('ios-app-template.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
+
+    - name: Prepare Gems
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+
+    - name: Prepare Build Tools
+      if: steps.cache-build-tools.outputs.cache-hit != 'true'
+      run: make prepare-build-tools
+      shell: bash
