@@ -1,7 +1,7 @@
 export FL_XCODE_VERSION = $(shell cat ./.xcode-version)
 ifdef CI
 export FASTLANE_HIDE_TIMESTAMP = true
-export CLONED_SOURCE_PACKAGES_PATH = ~/Library/Caches/SourcePackages
+export CLONED_SOURCE_PACKAGES_PATH = ./SourcePackages
 endif
 
 FASTLANE = bundle exec fastlane
@@ -20,7 +20,7 @@ INFO_PLIST_FILE_PATHS = $(patsubst %,$(SRCROOT)/iOS/%/Info.plist,$(PROJECT_NAMES
 
 bootstrap: prepare-gems prepare-build-tools resolve-dependencies
 
-clean: clean-derived-data clean-build-tools clean-gems
+clean: clean-derived-data clean-dependencies clean-build-tools clean-gems
 
 prepare-gems:
 ifndef CI
@@ -55,10 +55,17 @@ resolve-dependencies:
 		workspace:$(WORKSPACE) \
 		scheme:"$(TARGET_NAME) ($(firstword $(PROJECT_NAMES)))"
 
-update-dependencies: clean-derived-data
+update-dependencies: clean-dependencies
 	rm $(WORKSPACE)/xcshareddata/swiftpm/Package.resolved
 	@$(MAKE) resolve-dependencies
 	@$(MAKE) generate-license
+
+clean-dependencies:
+ifdef CLONED_SOURCE_PACKAGES_PATH
+	rm -rf $(CLONED_SOURCE_PACKAGES_PATH)
+else
+	rm -rf ~/Library/Developer/Xcode/DerivedData/$(TARGET_NAME)-*/SourcePackages
+endif
 
 lint:
 	$(SWIFTLINT) --fix --format

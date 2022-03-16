@@ -14,7 +14,7 @@ runs:
     - name: Cache Swift Packages
       uses: actions/cache@v2
       with:
-        path: ~/Library/Caches/SourcePackages
+        path: ./SourcePackages
         key: ${{ runner.os }}-spm-${{ hashFiles('ios-app-template.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
 
     - name: Prepare Gems
