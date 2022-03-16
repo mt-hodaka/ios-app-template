@@ -65,7 +65,7 @@ jobs:
         uses: ./.github/actions/bootstrap
 
       - name: Bump Build Number
-        run: make bump-build-number
+        run: make bump_build_number
 
       - name: Deploy
         run: make ${{ inputs.deploy-make-target }}

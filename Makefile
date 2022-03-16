@@ -18,49 +18,49 @@ PROJECTS = $(wildcard $(SRCROOT)/*.xcodeproj)
 PROJECT_NAMES = $(basename $(notdir $(PROJECTS)))
 INFO_PLIST_FILE_PATHS = $(patsubst %,$(SRCROOT)/iOS/%/Info.plist,$(PROJECT_NAMES))
 
-bootstrap: prepare-gems prepare-build-tools resolve-dependencies
+bootstrap: install_gems install_build_tools resolve_dependencies
 
-clean: clean-derived-data clean-dependencies clean-build-tools clean-gems
+clean: clean_derived_data clean_dependencies clean_build_tools clean_gems
 
-prepare-gems:
+install_gems:
 ifndef CI
 	rbenv install --skip-existing $(shell cat ./.ruby-version)
 	rbenv exec gem install bundler
 endif
 	bundle check || bundle install
 
-update-gems:
+update_gems:
 ifndef CI
 	rbenv exec gem update bundler
 endif
 	bundle update
 
-clean-gems:
+clean_gems:
 	rm -rf ./vendor/bundle
 
-prepare-build-tools:
-	$(FASTLANE) prepare_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(LICENSEPLIST)) configuration:$(BUILDTOOLS_CONFIGURATION)
-	$(FASTLANE) prepare_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(SWIFTGEN)) configuration:$(BUILDTOOLS_CONFIGURATION)
-	$(FASTLANE) prepare_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(SWIFTLINT)) configuration:$(BUILDTOOLS_CONFIGURATION)
+install_build_tools:
+	$(FASTLANE) install_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(LICENSEPLIST)) configuration:$(BUILDTOOLS_CONFIGURATION)
+	$(FASTLANE) install_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(SWIFTGEN)) configuration:$(BUILDTOOLS_CONFIGURATION)
+	$(FASTLANE) install_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(SWIFTLINT)) configuration:$(BUILDTOOLS_CONFIGURATION)
 
-update-build-tools:
+update_build_tools:
 	swift package update --package-path $(BUILDTOOLS_PATH)
-	@$(MAKE) prepare-build-tools
+	@$(MAKE) install_build_tools
 
-clean-build-tools:
+clean_build_tools:
 	swift package reset --package-path $(BUILDTOOLS_PATH)
 
-resolve-dependencies:
+resolve_dependencies:
 	$(FASTLANE) resolve_dependencies \
 		workspace:$(WORKSPACE) \
 		scheme:"$(TARGET_NAME) ($(firstword $(PROJECT_NAMES)))"
 
-update-dependencies: clean-dependencies
+update_dependencies: clean_dependencies
 	rm $(WORKSPACE)/xcshareddata/swiftpm/Package.resolved
-	@$(MAKE) resolve-dependencies
-	@$(MAKE) generate-license
+	@$(MAKE) resolve_dependencies
+	@$(MAKE) generate_license
 
-clean-dependencies:
+clean_dependencies:
 ifdef CLONED_SOURCE_PACKAGES_PATH
 	rm -rf $(CLONED_SOURCE_PACKAGES_PATH)
 else
@@ -71,13 +71,13 @@ lint:
 	$(SWIFTLINT) --fix --format
 	$(SWIFTLINT)
 
-generate-license:
+generate_license:
 	$(LICENSEPLIST) \
 		--output-path $(SRCROOT)/iOS/Settings.bundle \
 		--package-path $(WORKSPACE)/xcshareddata/swiftpm/Package.resolved \
 		--fail-if-missing-license
 
-generate-code:
+generate_code:
 	$(SWIFTGEN) --help || exit 0
 
 check:
@@ -85,11 +85,11 @@ check:
 		workspace:$(WORKSPACE) \
 		scheme:"$(TARGET_NAME) ($(firstword $(PROJECT_NAMES)))"
 
-report-coverage:
+report_coverage:
 	bash -c "bash <(curl -s https://codecov.io/bash) -J $(TARGET_NAME) -c"
 
 define DEPLOY
-deploy-$(1):
+deploy_$(1):
 	$(FASTLANE) deploy \
 		workspace:$(WORKSPACE) \
 		scheme:"$(TARGET_NAME) ($(1))"
@@ -97,16 +97,16 @@ endef
 
 $(foreach project,$(PROJECT_NAMES),$(eval $(call DEPLOY,$(project))))
 
-deploy-all: $(addprefix deploy-,$(PROJECT_NAMES))
+deploy_all: $(addprefix deploy_,$(PROJECT_NAMES))
 
-clean-derived-data:
+clean_derived_data:
 	rm -rf ~/Library/Developer/Xcode/DerivedData/$(TARGET_NAME)-*
 
-current-version:
+current_version:
 	$(FASTLANE) current_version \
 		info_plist_path:$(firstword $(INFO_PLIST_FILE_PATHS))
 
-bump-version-number:
+bump_version_number:
 ifdef VERSION_NUMBER
 	$(FASTLANE) bump_version_number \
 		info_plist_paths:"$(INFO_PLIST_FILE_PATHS)" \
@@ -116,7 +116,7 @@ else
 		info_plist_paths:"$(INFO_PLIST_FILE_PATHS)"
 endif
 
-bump-build-number:
+bump_build_number:
 ifdef BUILD_NUMBER
 	$(FASTLANE) bump_build_number \
 		info_plist_paths:"$(INFO_PLIST_FILE_PATHS)" \
@@ -127,5 +127,5 @@ else
 		build_number:$(shell git rev-list HEAD --merges | wc -l | tr -d ' ')
 endif
 
-get-commit-hash-at-build-number:
+get_commit_hash_at_build_number:
 	git rev-list HEAD --merges | tail -r | sed -n $(BUILD_NUMBER)p

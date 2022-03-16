@@ -24,5 +24,5 @@ runs:
 
     - name: Prepare Build Tools
       if: steps.cache-build-tools.outputs.cache-hit != 'true'
-      run: make prepare-build-tools
+      run: make install_build_tools
       shell: bash

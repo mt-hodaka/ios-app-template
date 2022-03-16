@@ -12,7 +12,7 @@ jobs:
   deploy-staging:
     uses: ./.github/workflows/deploy.yml
     with:
-      deploy-make-target: deploy-Staging
+      deploy-make-target: deploy_Staging
     secrets:
       slack-url: ${{ secrets.SLACK_URL }}
       distribution-certificate-base64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
@@ -29,7 +29,7 @@ jobs:
   deploy-production:
     uses: ./.github/workflows/deploy.yml
     with:
-      deploy-make-target: deploy-Production
+      deploy-make-target: deploy_Production
     secrets:
       slack-url: ${{ secrets.SLACK_URL }}
       distribution-certificate-base64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}

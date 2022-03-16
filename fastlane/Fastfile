@@ -17,7 +17,7 @@ platform :ios do
     xcversion
   end
 
-  lane :prepare_build_tool do |options|
+  lane :install_build_tool do |options|
     spm(
       command: "build",
       configuration: options[:configuration],
