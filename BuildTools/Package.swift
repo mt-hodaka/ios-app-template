@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version: 5.6
 // swiftlint:disable file_length line_length
 
 import PackageDescription
