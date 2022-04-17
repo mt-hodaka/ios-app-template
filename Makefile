@@ -1,4 +1,3 @@
-export FL_XCODE_VERSION = $(shell cat ./.xcode-version)
 ifdef CI
 export FASTLANE_HIDE_TIMESTAMP = true
 export CLONED_SOURCE_PACKAGES_PATH = ./SourcePackages
