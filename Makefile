@@ -22,7 +22,7 @@ INFO_PLIST_FILE_PATHS = $(patsubst %,$(SRCROOT)/iOS/%/Info.plist,$(PROJECT_NAMES
 
 bootstrap: install_gems install_build_tools resolve_dependencies
 
-clean: clean_derived_data clean_dependencies clean_build_tools clean_gems
+clean: clean_build_artifacts clean_derived_data clean_dependencies clean_build_tools clean_gems
 
 install_gems:
 ifndef CI
@@ -106,6 +106,13 @@ clean_derived_data:
 		xcodebuild clean -alltargets -project $$project; \
 	done
 	rm -rf ~/Library/Developer/Xcode/DerivedData/$(TARGET_NAME)-*
+
+clean_build_artifacts:
+	rm -rf ./fastlane/report.xml
+	rm -rf ./fastlane/test_output
+	rm -rf $(SRCROOT)/iOS/Settings.bundle/com.mono0926.LicensePlist*
+	rm -rf ./*.app.dSYM.zip
+	rm -rf ./*.ipa
 
 current_version:
 	$(FASTLANE) current_version \
