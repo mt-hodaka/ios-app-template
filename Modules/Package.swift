@@ -22,6 +22,10 @@ let package = Package(
                 .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
                 .product(name: "FirebasePerformance", package: "firebase-ios-sdk"),
+            ],
+            linkerSettings: [
+                // https://firebase.google.com/docs/ios/installation-methods#integrate-manually
+                .unsafeFlags(["-ObjC"]),
             ]),
         .testTarget(
             name: "AppFeatureTests",
