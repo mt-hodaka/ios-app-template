@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A5EB40252657DCCB00825B30"
-               BuildableName = "ios-app-template.app"
-               BlueprintName = "ios-app-template"
-               ReferencedContainer = "container:Production.xcodeproj">
+               BlueprintIdentifier = "6A84D708281C244700A0A651"
+               BuildableName = "ios-app-template.stg.app"
+               BlueprintName = "ios-app-template.stg"
+               ReferencedContainer = "container:ios-app-template.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A5EB40252657DCCB00825B30"
-            BuildableName = "ios-app-template.app"
-            BlueprintName = "ios-app-template"
-            ReferencedContainer = "container:Production.xcodeproj">
+            BlueprintIdentifier = "6A84D708281C244700A0A651"
+            BuildableName = "ios-app-template.stg.app"
+            BlueprintName = "ios-app-template.stg"
+            ReferencedContainer = "container:ios-app-template.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -78,16 +78,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A5EB40252657DCCB00825B30"
-            BuildableName = "ios-app-template.app"
-            BlueprintName = "ios-app-template"
-            ReferencedContainer = "container:Production.xcodeproj">
+            BlueprintIdentifier = "6A84D708281C244700A0A651"
+            BuildableName = "ios-app-template.stg.app"
+            BlueprintName = "ios-app-template.stg"
+            ReferencedContainer = "container:ios-app-template.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>353335889540-0g1o7531otkvfm14e8k8rov0j25okvon.apps.googleusercontent.com</string>
+	<string>353335889540-s5hi7a1mhjbjgs57tievt7narc9c0crp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.353335889540-0g1o7531otkvfm14e8k8rov0j25okvon</string>
+	<string>com.googleusercontent.apps.353335889540-s5hi7a1mhjbjgs57tievt7narc9c0crp</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDOxUnjhHq5UZ3OvZB7zKW1Ket77g_Kd50</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mt-hodaka.ios-app-template.Staging</string>
+	<string>com.mt-hodaka.ios-app-template.stg</string>
 	<key>PROJECT_ID</key>
 	<string>ios-app-template-31dca</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:353335889540:ios:80c0a679eb622d39383cd1</string>
+	<string>1:353335889540:ios:773179977ee92eee383cd1</string>
 </dict>
 </plist>

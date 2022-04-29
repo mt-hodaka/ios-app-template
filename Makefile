@@ -7,18 +7,18 @@ export CLONED_SOURCE_PACKAGES_PATH = ./SourcePackages
 endif
 
 FASTLANE = bundle exec fastlane
-BUILDTOOLS_PATH = ./BuildTools
+BUILDTOOLS_ROOT = ./BuildTools
 BUILDTOOLS_CONFIGURATION = release
-LICENSEPLIST = $(BUILDTOOLS_PATH)/.build/$(BUILDTOOLS_CONFIGURATION)/license-plist
-SWIFTLINT = $(BUILDTOOLS_PATH)/.build/$(BUILDTOOLS_CONFIGURATION)/swiftlint
-SWIFTGEN = $(BUILDTOOLS_PATH)/.build/$(BUILDTOOLS_CONFIGURATION)/swiftgen
+LICENSEPLIST = $(BUILDTOOLS_ROOT)/.build/$(BUILDTOOLS_CONFIGURATION)/license-plist
+SWIFTLINT = $(BUILDTOOLS_ROOT)/.build/$(BUILDTOOLS_CONFIGURATION)/swiftlint
+SWIFTGEN = $(BUILDTOOLS_ROOT)/.build/$(BUILDTOOLS_CONFIGURATION)/swiftgen
 
-SRCROOT = ./App
-TARGET_NAME = ios-app-template
-WORKSPACE = ./$(TARGET_NAME).xcworkspace
-PROJECTS = $(wildcard $(SRCROOT)/*.xcodeproj)
-PROJECT_NAMES = $(basename $(notdir $(PROJECTS)))
-INFO_PLIST_FILE_PATHS = $(patsubst %,$(SRCROOT)/iOS/%/Info.plist,$(PROJECT_NAMES))
+APP_ROOT = ./App
+APP_NAME = ios-app-template
+WORKSPACE = ./$(APP_NAME).xcworkspace
+PROJECT = $(APP_ROOT)/$(APP_NAME).xcodeproj
+SCHEMES = $(basename $(notdir $(wildcard $(PROJECT)/xcshareddata/xcschemes/*.xcscheme)))
+INFO_PLIST_FILE_PATHS = $(wildcard $(APP_ROOT)/iOS/Env/*/Info.plist)
 
 bootstrap: install_gems install_build_tools resolve_dependencies
 
@@ -41,21 +41,21 @@ clean_gems:
 	rm -rf ./vendor/bundle
 
 install_build_tools:
-	$(FASTLANE) install_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(LICENSEPLIST)) configuration:$(BUILDTOOLS_CONFIGURATION)
-	$(FASTLANE) install_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(SWIFTGEN)) configuration:$(BUILDTOOLS_CONFIGURATION)
-	$(FASTLANE) install_build_tool package_path:$(BUILDTOOLS_PATH) product:$(notdir $(SWIFTLINT)) configuration:$(BUILDTOOLS_CONFIGURATION)
+	$(FASTLANE) install_build_tool package_path:$(BUILDTOOLS_ROOT) product:$(notdir $(LICENSEPLIST)) configuration:$(BUILDTOOLS_CONFIGURATION)
+	$(FASTLANE) install_build_tool package_path:$(BUILDTOOLS_ROOT) product:$(notdir $(SWIFTGEN)) configuration:$(BUILDTOOLS_CONFIGURATION)
+	$(FASTLANE) install_build_tool package_path:$(BUILDTOOLS_ROOT) product:$(notdir $(SWIFTLINT)) configuration:$(BUILDTOOLS_CONFIGURATION)
 
 update_build_tools:
-	swift package update --package-path $(BUILDTOOLS_PATH)
+	swift package update --package-path $(BUILDTOOLS_ROOT)
 	@$(MAKE) install_build_tools
 
 clean_build_tools:
-	swift package reset --package-path $(BUILDTOOLS_PATH)
+	swift package reset --package-path $(BUILDTOOLS_ROOT)
 
 resolve_dependencies:
 	$(FASTLANE) resolve_dependencies \
 		workspace:$(WORKSPACE) \
-		scheme:"$(TARGET_NAME) ($(firstword $(PROJECT_NAMES)))"
+		scheme:$(firstword $(SCHEMES))
 
 update_dependencies: clean_dependencies
 	rm $(WORKSPACE)/xcshareddata/swiftpm/Package.resolved
@@ -66,7 +66,7 @@ clean_dependencies:
 ifdef CLONED_SOURCE_PACKAGES_PATH
 	rm -rf $(CLONED_SOURCE_PACKAGES_PATH)
 else
-	rm -rf ~/Library/Developer/Xcode/DerivedData/$(TARGET_NAME)-*/SourcePackages
+	rm -rf ~/Library/Developer/Xcode/DerivedData/$(APP_NAME)-*/SourcePackages
 endif
 
 lint:
@@ -75,7 +75,7 @@ lint:
 
 generate_license:
 	$(LICENSEPLIST) \
-		--output-path $(SRCROOT)/iOS/Settings.bundle \
+		--output-path $(APP_ROOT)/iOS/Settings.bundle \
 		--package-path $(WORKSPACE)/xcshareddata/swiftpm/Package.resolved \
 		--fail-if-missing-license
 
@@ -85,32 +85,30 @@ generate_code:
 check:
 	$(FASTLANE) test \
 		workspace:$(WORKSPACE) \
-		scheme:"$(TARGET_NAME) ($(firstword $(PROJECT_NAMES)))"
+		scheme:$(firstword $(SCHEMES))
 
 report_coverage:
-	bash -c "bash <(curl -s https://codecov.io/bash) -J $(TARGET_NAME) -c"
+	bash -c "bash <(curl -s https://codecov.io/bash) -J $(APP_NAME) -c"
 
 define DEPLOY
 deploy_$(1):
 	$(FASTLANE) deploy \
 		workspace:$(WORKSPACE) \
-		scheme:"$(TARGET_NAME) ($(1))"
+		scheme:$(1)
 endef
 
-$(foreach project,$(PROJECT_NAMES),$(eval $(call DEPLOY,$(project))))
+$(foreach scheme,$(SCHEMES),$(eval $(call DEPLOY,$(scheme))))
 
-deploy_all: $(addprefix deploy_,$(PROJECT_NAMES))
+deploy_all: $(addprefix deploy_,$(SCHEMES))
 
 clean_derived_data:
-	for project in $(PROJECTS); do \
-		xcodebuild clean -alltargets -project $$project; \
-	done
-	rm -rf ~/Library/Developer/Xcode/DerivedData/$(TARGET_NAME)-*
+	xcodebuild clean -alltargets -project $(PROJECT)
+	rm -rf ~/Library/Developer/Xcode/DerivedData/$(APP_NAME)-*
 
 clean_build_artifacts:
 	rm -rf ./fastlane/report.xml
 	rm -rf ./fastlane/test_output
-	rm -rf $(SRCROOT)/iOS/Settings.bundle/com.mono0926.LicensePlist*
+	rm -rf $(APP_ROOT)/iOS/Settings.bundle/com.mono0926.LicensePlist*
 	rm -rf ./*.app.dSYM.zip
 	rm -rf ./*.ipa
 

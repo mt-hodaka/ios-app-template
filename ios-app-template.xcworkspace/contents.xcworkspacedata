@@ -2,10 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:App/Production.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:App/Staging.xcodeproj">
+      location = "group:App/ios-app-template.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Modules">
