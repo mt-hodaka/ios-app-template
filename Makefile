@@ -102,6 +102,9 @@ $(foreach project,$(PROJECT_NAMES),$(eval $(call DEPLOY,$(project))))
 deploy_all: $(addprefix deploy_,$(PROJECT_NAMES))
 
 clean_derived_data:
+	for project in $(PROJECTS); do \
+		xcodebuild clean -alltargets -project $$project; \
+	done
 	rm -rf ~/Library/Developer/Xcode/DerivedData/$(TARGET_NAME)-*
 
 current_version:
