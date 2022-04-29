@@ -32,7 +32,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: macos-11
+    runs-on: macos-12
     timeout-minutes: 30
     env:
       SLACK_URL: ${{ secrets.slack-url }}

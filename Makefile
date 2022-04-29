@@ -1,4 +1,6 @@
-export FL_XCODE_VERSION = $(shell cat ./.xcode-version)
+export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = 60
+export FASTLANE_XCODEBUILD_SETTINGS_RETRIES = 1
+
 ifdef CI
 export FASTLANE_HIDE_TIMESTAMP = true
 export CLONED_SOURCE_PACKAGES_PATH = ./SourcePackages
