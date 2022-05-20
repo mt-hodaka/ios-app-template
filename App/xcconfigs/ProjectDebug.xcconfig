@@ -1,4 +1,4 @@
-#include "./Project-Base.xcconfig"
+#include "./ProjectBase.xcconfig"
 
 ONLY_ACTIVE_ARCH = YES
 ENABLE_TESTABILITY = YES

@@ -32,15 +32,35 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6A84D705281C1E9300A0A651 /* env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84D6FB281C1E9300A0A651 /* env.swift */; };
+		6A84D706281C1E9300A0A651 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A84D6FC281C1E9300A0A651 /* GoogleService-Info.plist */; };
+		6A84D70F281C244700A0A651 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB40292657DCCB00825B30 /* App.swift */; };
+		6A84D712281C244700A0A651 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 6A84D70D281C244700A0A651 /* AppFeature */; };
+		6A84D714281C244700A0A651 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A52550422695E3B8004D3750 /* Settings.bundle */; };
+		6A84D71D281C252E00A0A651 /* env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84D6F5281C1E9300A0A651 /* env.swift */; };
+		6A84D71E281C253100A0A651 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A84D6F6281C1E9300A0A651 /* GoogleService-Info.plist */; };
+		6A86CEDA28380AB70013354F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A86CED828380A670013354F /* Assets.xcassets */; };
 		A52550432695E3B8004D3750 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A52550422695E3B8004D3750 /* Settings.bundle */; };
 		A52776B726583C29008B42E6 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A52776B626583C29008B42E6 /* AppFeature */; };
-		A52776B926584033008B42E6 /* env.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52776B826583FE6008B42E6 /* env.swift */; };
-		A531796D2696154700A0CF6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A531796C2696154700A0CF6E /* GoogleService-Info.plist */; };
 		A5EB402A2657DCCB00825B30 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB40292657DCCB00825B30 /* App.swift */; };
 		A5EB402E2657DCCD00825B30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5EB402D2657DCCD00825B30 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6A84D70A281C244700A0A651 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5EB401E2657DCCB00825B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5D068272695773B00F7B052;
+			remoteInfo = Linter;
+		};
+		6A84D70C281C244700A0A651 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5EB401E2657DCCB00825B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5D0682E2695881F00F7B052;
+			remoteInfo = Generator;
+		};
 		A5D0682C2695776700F7B052 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5EB401E2657DCCB00825B30 /* Project object */;
@@ -58,22 +78,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A520955B26B3E9280093E5A4 /* App-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "App-Base.xcconfig"; sourceTree = "<group>"; };
-		A520955C26B3EA270093E5A4 /* App-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "App-Debug.xcconfig"; sourceTree = "<group>"; };
-		A520955D26B3EA2F0093E5A4 /* App-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "App-Release.xcconfig"; sourceTree = "<group>"; };
+		6A84D6F3281C1E9300A0A651 /* AppStg.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = AppStg.xcconfig; sourceTree = "<group>"; };
+		6A84D6F5281C1E9300A0A651 /* env.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = env.swift; sourceTree = "<group>"; };
+		6A84D6F6281C1E9300A0A651 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A84D6F7281C1E9300A0A651 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A84D6F9281C1E9300A0A651 /* AppProd.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = AppProd.xcconfig; sourceTree = "<group>"; };
+		6A84D6FB281C1E9300A0A651 /* env.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = env.swift; sourceTree = "<group>"; };
+		6A84D6FC281C1E9300A0A651 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A84D6FD281C1E9300A0A651 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A84D71B281C244700A0A651 /* ios-app-template.stg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app-template.stg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A86CED828380A670013354F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A520955B26B3E9280093E5A4 /* AppBase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppBase.xcconfig; sourceTree = "<group>"; };
 		A52550422695E3B8004D3750 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		A52776B826583FE6008B42E6 /* env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = env.swift; sourceTree = "<group>"; };
-		A531796C2696154700A0CF6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A592C04726B401850019832F /* Project-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Base.xcconfig"; sourceTree = "<group>"; };
-		A592C04826B401980019832F /* Project-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Debug.xcconfig"; sourceTree = "<group>"; };
-		A592C04926B401A20019832F /* Project-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Release.xcconfig"; sourceTree = "<group>"; };
+		A592C04726B401850019832F /* ProjectBase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectBase.xcconfig; sourceTree = "<group>"; };
+		A592C04826B401980019832F /* ProjectDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectDebug.xcconfig; sourceTree = "<group>"; };
+		A592C04926B401A20019832F /* ProjectRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectRelease.xcconfig; sourceTree = "<group>"; };
 		A5EB40262657DCCB00825B30 /* ios-app-template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app-template.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5EB40292657DCCB00825B30 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		A5EB402D2657DCCD00825B30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A5EB40322657DCCD00825B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6A84D711281C244700A0A651 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A84D712281C244700A0A651 /* AppFeature in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5EB40232657DCCB00825B30 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,6 +118,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A84D6F1281C1E9300A0A651 /* Env */ = {
+			isa = PBXGroup;
+			children = (
+				6A84D6F8281C1E9300A0A651 /* prod */,
+				6A84D6F2281C1E9300A0A651 /* stg */,
+			);
+			path = Env;
+			sourceTree = "<group>";
+		};
+		6A84D6F2281C1E9300A0A651 /* stg */ = {
+			isa = PBXGroup;
+			children = (
+				6A86CED828380A670013354F /* Assets.xcassets */,
+				6A84D6F5281C1E9300A0A651 /* env.swift */,
+				6A84D6F6281C1E9300A0A651 /* GoogleService-Info.plist */,
+				6A84D6F7281C1E9300A0A651 /* Info.plist */,
+			);
+			path = stg;
+			sourceTree = "<group>";
+		};
+		6A84D6F8281C1E9300A0A651 /* prod */ = {
+			isa = PBXGroup;
+			children = (
+				A5EB402D2657DCCD00825B30 /* Assets.xcassets */,
+				6A84D6FB281C1E9300A0A651 /* env.swift */,
+				6A84D6FC281C1E9300A0A651 /* GoogleService-Info.plist */,
+				6A84D6FD281C1E9300A0A651 /* Info.plist */,
+			);
+			path = prod;
+			sourceTree = "<group>";
+		};
 		A5EB401D2657DCCB00825B30 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				A5EB40262657DCCB00825B30 /* ios-app-template.app */,
+				6A84D71B281C244700A0A651 /* ios-app-template.stg.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,11 +171,9 @@
 		A5EB40282657DCCB00825B30 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				A520955B26B3E9280093E5A4 /* App-Base.xcconfig */,
 				A5EB40292657DCCB00825B30 /* App.swift */,
-				A5EB402D2657DCCD00825B30 /* Assets.xcassets */,
 				A52550422695E3B8004D3750 /* Settings.bundle */,
-				A5EB403B2657E12A00825B30 /* Env */,
+				6A84D6F1281C1E9300A0A651 /* Env */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -122,25 +185,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A5EB403B2657E12A00825B30 /* Env */ = {
-			isa = PBXGroup;
-			children = (
-				A520955C26B3EA270093E5A4 /* App-Debug.xcconfig */,
-				A520955D26B3EA2F0093E5A4 /* App-Release.xcconfig */,
-				A52776B826583FE6008B42E6 /* env.swift */,
-				A5EB40322657DCCD00825B30 /* Info.plist */,
-				A531796C2696154700A0CF6E /* GoogleService-Info.plist */,
-			);
-			name = Env;
-			path = Production;
-			sourceTree = "<group>";
-		};
 		A5ECDB0026B40F6B00A122C4 /* xcconfigs */ = {
 			isa = PBXGroup;
 			children = (
-				A592C04726B401850019832F /* Project-Base.xcconfig */,
-				A592C04826B401980019832F /* Project-Debug.xcconfig */,
-				A592C04926B401A20019832F /* Project-Release.xcconfig */,
+				A592C04726B401850019832F /* ProjectBase.xcconfig */,
+				A592C04826B401980019832F /* ProjectDebug.xcconfig */,
+				A592C04926B401A20019832F /* ProjectRelease.xcconfig */,
+				A520955B26B3E9280093E5A4 /* AppBase.xcconfig */,
+				6A84D6F9281C1E9300A0A651 /* AppProd.xcconfig */,
+				6A84D6F3281C1E9300A0A651 /* AppStg.xcconfig */,
 			);
 			path = xcconfigs;
 			sourceTree = "<group>";
@@ -148,6 +201,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6A84D708281C244700A0A651 /* ios-app-template.stg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A84D718281C244700A0A651 /* Build configuration list for PBXNativeTarget "ios-app-template.stg" */;
+			buildPhases = (
+				6A84D70E281C244700A0A651 /* Sources */,
+				6A84D711281C244700A0A651 /* Frameworks */,
+				6A84D713281C244700A0A651 /* Resources */,
+				6A84D717281C244700A0A651 /* Crashlytics */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6A84D709281C244700A0A651 /* PBXTargetDependency */,
+				6A84D70B281C244700A0A651 /* PBXTargetDependency */,
+			);
+			name = "ios-app-template.stg";
+			packageProductDependencies = (
+				6A84D70D281C244700A0A651 /* AppFeature */,
+			);
+			productName = App;
+			productReference = 6A84D71B281C244700A0A651 /* ios-app-template.stg.app */;
+			productType = "com.apple.product-type.application";
+		};
 		A5EB40252657DCCB00825B30 /* ios-app-template */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5EB40352657DCCD00825B30 /* Build configuration list for PBXNativeTarget "ios-app-template" */;
@@ -191,7 +267,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A5EB40212657DCCB00825B30 /* Build configuration list for PBXProject "Production" */;
+			buildConfigurationList = A5EB40212657DCCB00825B30 /* Build configuration list for PBXProject "ios-app-template" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -205,6 +281,7 @@
 			projectRoot = "";
 			targets = (
 				A5EB40252657DCCB00825B30 /* ios-app-template */,
+				6A84D708281C244700A0A651 /* ios-app-template.stg */,
 				A5D068272695773B00F7B052 /* Linter */,
 				A5D0682E2695881F00F7B052 /* Generator */,
 			);
@@ -212,19 +289,49 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6A84D713281C244700A0A651 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A84D714281C244700A0A651 /* Settings.bundle in Resources */,
+				6A86CEDA28380AB70013354F /* Assets.xcassets in Resources */,
+				6A84D71E281C253100A0A651 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5EB40242657DCCB00825B30 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A52550432695E3B8004D3750 /* Settings.bundle in Resources */,
+				6A84D706281C1E9300A0A651 /* GoogleService-Info.plist in Resources */,
 				A5EB402E2657DCCD00825B30 /* Assets.xcassets in Resources */,
-				A531796D2696154700A0CF6E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6A84D717281C244700A0A651 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which ${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run > /dev/null; then\n    ${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\nelse\n    echo \"warning: Crashlytics/run not found\"\nfi\n";
+		};
 		A53BD20E2696190400F31861 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,18 +389,37 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6A84D70E281C244700A0A651 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A84D70F281C244700A0A651 /* App.swift in Sources */,
+				6A84D71D281C252E00A0A651 /* env.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5EB40222657DCCB00825B30 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A5EB402A2657DCCB00825B30 /* App.swift in Sources */,
-				A52776B926584033008B42E6 /* env.swift in Sources */,
+				6A84D705281C1E9300A0A651 /* env.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6A84D709281C244700A0A651 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5D068272695773B00F7B052 /* Linter */;
+			targetProxy = 6A84D70A281C244700A0A651 /* PBXContainerItemProxy */;
+		};
+		6A84D70B281C244700A0A651 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5D0682E2695881F00F7B052 /* Generator */;
+			targetProxy = 6A84D70C281C244700A0A651 /* PBXContainerItemProxy */;
+		};
 		A5D0682D2695776700F7B052 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A5D068272695773B00F7B052 /* Linter */;
@@ -307,6 +433,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		6A84D719281C244700A0A651 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A84D6F3281C1E9300A0A651 /* AppStg.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		6A84D71A281C244700A0A651 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A84D6F3281C1E9300A0A651 /* AppStg.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 		A5D068282695773B00F7B052 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -345,28 +485,28 @@
 		};
 		A5EB40332657DCCD00825B30 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A592C04826B401980019832F /* Project-Debug.xcconfig */;
+			baseConfigurationReference = A592C04826B401980019832F /* ProjectDebug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		A5EB40342657DCCD00825B30 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A592C04926B401A20019832F /* Project-Release.xcconfig */;
+			baseConfigurationReference = A592C04926B401A20019832F /* ProjectRelease.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		A5EB40362657DCCD00825B30 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A520955C26B3EA270093E5A4 /* App-Debug.xcconfig */;
+			baseConfigurationReference = 6A84D6F9281C1E9300A0A651 /* AppProd.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		A5EB40372657DCCD00825B30 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A520955D26B3EA2F0093E5A4 /* App-Release.xcconfig */;
+			baseConfigurationReference = 6A84D6F9281C1E9300A0A651 /* AppProd.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
@@ -374,6 +514,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6A84D718281C244700A0A651 /* Build configuration list for PBXNativeTarget "ios-app-template.stg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A84D719281C244700A0A651 /* Debug */,
+				6A84D71A281C244700A0A651 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A5D0682A2695773B00F7B052 /* Build configuration list for PBXAggregateTarget "Linter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -392,7 +541,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A5EB40212657DCCB00825B30 /* Build configuration list for PBXProject "Production" */ = {
+		A5EB40212657DCCB00825B30 /* Build configuration list for PBXProject "ios-app-template" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A5EB40332657DCCD00825B30 /* Debug */,
@@ -413,6 +562,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6A84D70D281C244700A0A651 /* AppFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppFeature;
+		};
 		A52776B626583C29008B42E6 /* AppFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppFeature;

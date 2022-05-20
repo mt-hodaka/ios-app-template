@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A5EB40252657DCCB00825B30"
-               BuildableName = "ios-app-template.Staging.app"
+               BuildableName = "ios-app-template.app"
                BlueprintName = "ios-app-template"
-               ReferencedContainer = "container:Staging.xcodeproj">
+               ReferencedContainer = "container:ios-app-template.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A5EB40252657DCCB00825B30"
-            BuildableName = "ios-app-template.Staging.app"
+            BuildableName = "ios-app-template.app"
             BlueprintName = "ios-app-template"
-            ReferencedContainer = "container:Staging.xcodeproj">
+            ReferencedContainer = "container:ios-app-template.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A5EB40252657DCCB00825B30"
-            BuildableName = "ios-app-template.Staging.app"
+            BuildableName = "ios-app-template.app"
             BlueprintName = "ios-app-template"
-            ReferencedContainer = "container:Staging.xcodeproj">
+            ReferencedContainer = "container:ios-app-template.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

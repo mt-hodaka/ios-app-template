@@ -16,9 +16,9 @@ jobs:
       SLACK_URL: ${{ secrets.SLACK_URL }}
     strategy:
       matrix:
-        target:
-          - Staging
-          - Production
+        scheme:
+          - ios-app-template
+          - ios-app-template.stg
     steps:
       # [Installing an Apple certificate on macOS runners for Xcode development - GitHub Docs](https://docs.github.com/en/actions/guides/installing-an-apple-certificate-on-macos-runners-for-xcode-development#creating-secrets-FOR_YOUR_CERTIFICATE_AND_PROVISIONING_PROFIle)
       - name: Install the Distribution certificate
@@ -51,7 +51,7 @@ jobs:
         run: make bump_build_number
 
       - name: Deploy
-        run: make deploy_${{ matrix.target }}
+        run: make deploy_${{ matrix.scheme }}
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}

@@ -1,0 +1,3 @@
+#include "./AppBase.xcconfig"
+
+ENV_NAME = stg
