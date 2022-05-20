@@ -9,36 +9,54 @@ on:
       - LICENSE
 
 jobs:
-  deploy-staging:
-    uses: ./.github/workflows/deploy.yml
-    with:
-      deploy-make-target: deploy_Staging
-    secrets:
-      slack-url: ${{ secrets.SLACK_URL }}
-      distribution-certificate-base64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
-      distribution-certificate-password: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
-      keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
-      apple-id: ${{ secrets.APPLE_ID }}
-      itc-team-id: ${{ secrets.ITC_TEAM_ID }}
-      team-id: ${{ secrets.TEAM_ID }}
-      fastlane-apple-application-specific-password: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
-      app-store-connect-api-key-key-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
-      app-store-connect-api-key-issuer-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
-      app-store-connect-api-key-key: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+  deploy:
+    runs-on: macos-12
+    timeout-minutes: 30
+    env:
+      SLACK_URL: ${{ secrets.SLACK_URL }}
+    strategy:
+      matrix:
+        target:
+          - Staging
+          - Production
+    steps:
+      # [Installing an Apple certificate on macOS runners for Xcode development - GitHub Docs](https://docs.github.com/en/actions/guides/installing-an-apple-certificate-on-macos-runners-for-xcode-development#creating-secrets-FOR_YOUR_CERTIFICATE_AND_PROVISIONING_PROFIle)
+      - name: Install the Distribution certificate
+        env:
+          DISTRIBUTION_CERTIFICATE_BASE64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
+          DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
-  deploy-production:
-    uses: ./.github/workflows/deploy.yml
-    with:
-      deploy-make-target: deploy_Production
-    secrets:
-      slack-url: ${{ secrets.SLACK_URL }}
-      distribution-certificate-base64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
-      distribution-certificate-password: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
-      keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
-      apple-id: ${{ secrets.APPLE_ID }}
-      itc-team-id: ${{ secrets.ITC_TEAM_ID }}
-      team-id: ${{ secrets.TEAM_ID }}
-      fastlane-apple-application-specific-password: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
-      app-store-connect-api-key-key-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
-      app-store-connect-api-key-issuer-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
-      app-store-connect-api-key-key: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+          echo -n "$DISTRIBUTION_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
+
+          security create-keychain -p $KEYCHAIN_PASSWORD $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p $KEYCHAIN_PASSWORD $KEYCHAIN_PATH
+
+          security import $CERTIFICATE_PATH -P $DISTRIBUTION_CERTIFICATE_PASSWORD -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # fetch all history because bump build number does not work
+
+      - name: Bootstrap
+        uses: ./.github/actions/bootstrap
+
+      - name: Bump Build Number
+        run: make bump_build_number
+
+      - name: Deploy
+        run: make deploy_${{ matrix.target }}
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
