@@ -1,11 +1,13 @@
 {
   "extends": [
     "config:base",
-    "group:allNonMajor"
+    "group:allNonMajor",
+    "schedule:weekends"
   ],
   "ignorePresets": [
     ":prHourlyLimit2"
   ],
+  "timezone": "Asia/Tokyo",
   "packageRules": [
     {
       "matchManagers": ["bundler"],
