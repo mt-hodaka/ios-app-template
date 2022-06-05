@@ -41,7 +41,7 @@ jobs:
           security list-keychain -d user -s $KEYCHAIN_PATH
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0 # fetch all history because bump build number does not work
 
