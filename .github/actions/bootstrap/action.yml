@@ -6,13 +6,13 @@ runs:
   steps:
     - name: Cache Build Tools
       id: cache-build-tools
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: BuildTools/**/.build
         key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version', 'BuildTools/**/Package.resolved') }}
 
     - name: Cache Swift Packages
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ./SourcePackages
         key: ${{ runner.os }}-spm-${{ hashFiles('ios-app-template.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
