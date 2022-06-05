@@ -5,5 +5,14 @@
   ],
   "ignorePresets": [
     ":prHourlyLimit2"
+  ],
+  "packageRules": [
+    {
+      "matchPaths": [
+        "BuildTools/**"
+      ],
+      "groupName": "Build Tools",
+      "semanticCommitScope": "tools"
+    }
   ]
 }
