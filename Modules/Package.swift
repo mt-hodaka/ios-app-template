@@ -12,7 +12,7 @@ let package = Package(
         .library(name: "AppFeature", targets: ["AppFeature"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "8.0.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "v8.15.0"),
     ],
     targets: [
         // MARK: - AppFeature
