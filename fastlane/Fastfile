@@ -18,10 +18,15 @@ platform :ios do
   end
 
   lane :install_build_tool do |options|
+    binary_path = options[:binary_path]
+    configuration = /(debug|release)/.match(binary_path).to_a[1]
+    package_path = /(.+)\/.build/.match(binary_path).to_a[1]
+    product = File.basename(binary_path)
+
     spm(
       command: "build",
-      configuration: options[:configuration],
-      package_path: "#{options[:package_path]} --product #{options[:product]}" # workaround: `--product` parameter is not implemented in the `spm` action.
+      configuration: configuration,
+      package_path: "#{package_path} --product #{product}" # workaround: `--product` parameter is not implemented in the `spm` action.
     )
   end
 
