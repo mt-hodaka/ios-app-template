@@ -9,6 +9,6 @@ let package = Package(
         .macOS(.v11),
     ],
     dependencies: [
-        .package(url: "https://github.com/realm/SwiftLint.git", from: "0.43.1"),
+        .package(url: "https://github.com/realm/SwiftLint.git", from: "0.47.1"),
     ]
 )

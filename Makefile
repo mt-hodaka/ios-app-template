@@ -8,6 +8,7 @@ endif
 
 FASTLANE = bundle exec fastlane
 BUILDTOOLS_ROOT = ./BuildTools
+BUILDTOOLS_PACKAGE_PATHS = $(dir $(wildcard $(BUILDTOOLS_ROOT)/*/Package.swift))
 BUILDTOOLS_CONFIGURATION = release
 LICENSEPLIST = $(BUILDTOOLS_ROOT)/_LicensePlist/.build/$(BUILDTOOLS_CONFIGURATION)/license-plist
 SWIFTLINT = $(BUILDTOOLS_ROOT)/_SwiftLint/.build/$(BUILDTOOLS_CONFIGURATION)/swiftlint
@@ -47,11 +48,15 @@ install_build_tools:
 	$(FASTLANE) install_build_tool binary_path:$(SWIFTLINT)
 
 update_build_tools:
-	swift package update --package-path $(BUILDTOOLS_ROOT)
+	for path in $(BUILDTOOLS_PACKAGE_PATHS); do \
+		swift package update --package-path $$path; \
+	done
 	@$(MAKE) install_build_tools
 
 clean_build_tools:
-	swift package reset --package-path $(BUILDTOOLS_ROOT)
+	for path in $(BUILDTOOLS_PACKAGE_PATHS); do \
+		swift package reset --package-path $$path; \
+	done
 
 resolve_dependencies:
 	$(FASTLANE) resolve_dependencies \

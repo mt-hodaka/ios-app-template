@@ -9,6 +9,6 @@ let package = Package(
         .macOS(.v11),
     ],
     dependencies: [
-        .package(url: "https://github.com/mono0926/LicensePlist.git", from: "3.13.0"),
+        .package(url: "https://github.com/mono0926/LicensePlist.git", from: "3.22.0"),
     ]
 )

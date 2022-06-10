@@ -9,6 +9,6 @@ let package = Package(
         .macOS(.v11),
     ],
     dependencies: [
-        .package(url: "https://github.com/SwiftGen/SwiftGen.git", from: "6.4.0"),
+        .package(url: "https://github.com/SwiftGen/SwiftGen.git", from: "6.5.1"),
     ]
 )
