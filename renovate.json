@@ -14,11 +14,16 @@
       "rangeStrategy": "update-lockfile"
     },
     {
-      "matchPaths": [
-        "BuildTools/**"
-      ],
+      "matchPaths": ["Mintfile"],
       "groupName": "Build Tools",
       "semanticCommitScope": "tools"
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["^Mintfile$"],
+      "matchStrings": ["(?<depName>.+?)@(?<currentValue>[a-zA-Z0-9.]+)"],
+      "datasourceTemplate": "github-releases"
     }
   ]
 }

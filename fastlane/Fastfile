@@ -17,19 +17,6 @@ platform :ios do
     xcversion
   end
 
-  lane :install_build_tool do |options|
-    binary_path = options[:binary_path]
-    configuration = /(debug|release)/.match(binary_path).to_a[1]
-    package_path = /(.+)\/.build/.match(binary_path).to_a[1]
-    product = File.basename(binary_path)
-
-    spm(
-      command: "build",
-      configuration: configuration,
-      package_path: "#{package_path} --product #{product}" # workaround: `--product` parameter is not implemented in the `spm` action.
-    )
-  end
-
   lane :resolve_dependencies do |options|
     xcargs = ["-resolvePackageDependencies"]
     xcargs.concat ["-clonedSourcePackagesDirPath", ENV["CLONED_SOURCE_PACKAGES_PATH"]] unless ENV["CLONED_SOURCE_PACKAGES_PATH"].nil?

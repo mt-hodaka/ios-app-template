@@ -15,14 +15,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios install_build_tool
-
-```sh
-[bundle exec] fastlane ios install_build_tool
-```
-
-
-
 ### ios resolve_dependencies
 
 ```sh

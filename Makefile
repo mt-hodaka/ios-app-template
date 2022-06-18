@@ -1,5 +1,7 @@
 export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = 60
 export FASTLANE_XCODEBUILD_SETTINGS_RETRIES = 1
+export MINT_PATH = ./.mint/lib
+export MINT_LINK_PATH = ./.mint/bin
 
 ifdef CI
 export FASTLANE_HIDE_TIMESTAMP = true
@@ -10,9 +12,9 @@ FASTLANE = bundle exec fastlane
 BUILDTOOLS_ROOT = ./BuildTools
 BUILDTOOLS_PACKAGE_PATHS = $(dir $(wildcard $(BUILDTOOLS_ROOT)/*/Package.swift))
 BUILDTOOLS_CONFIGURATION = release
-LICENSEPLIST = $(BUILDTOOLS_ROOT)/_LicensePlist/.build/$(BUILDTOOLS_CONFIGURATION)/license-plist
-SWIFTLINT = $(BUILDTOOLS_ROOT)/_SwiftLint/.build/$(BUILDTOOLS_CONFIGURATION)/swiftlint
-SWIFTGEN = $(BUILDTOOLS_ROOT)/_SwiftGen/.build/$(BUILDTOOLS_CONFIGURATION)/swiftgen
+LICENSEPLIST = $(MINT_LINK_PATH)/license-plist
+SWIFTLINT = $(MINT_LINK_PATH)/swiftlint
+SWIFTGEN = $(MINT_LINK_PATH)/swiftgen
 
 APP_ROOT = ./App
 APP_NAME = ios-app-template
@@ -36,20 +38,11 @@ clean_gems:
 	rm -rf ./vendor/bundle
 
 install_build_tools:
-	$(FASTLANE) install_build_tool binary_path:$(LICENSEPLIST)
-	$(FASTLANE) install_build_tool binary_path:$(SWIFTGEN)
-	$(FASTLANE) install_build_tool binary_path:$(SWIFTLINT)
-
-update_build_tools:
-	for path in $(BUILDTOOLS_PACKAGE_PATHS); do \
-		swift package update --package-path $$path; \
-	done
-	@$(MAKE) install_build_tools
+	mint bootstrap --link --verbose
 
 clean_build_tools:
-	for path in $(BUILDTOOLS_PACKAGE_PATHS); do \
-		swift package reset --package-path $$path; \
-	done
+	rm -rf $(MINT_PATH)
+	rm -rf $(MINT_LINK_PATH)
 
 resolve_dependencies:
 	$(FASTLANE) resolve_dependencies \
