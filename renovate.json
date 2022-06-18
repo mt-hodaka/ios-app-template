@@ -8,6 +8,12 @@
   ],
   "packageRules": [
     {
+      "matchManagers": ["bundler"],
+      "groupName": "Gems",
+      "semanticCommitScope": "gems",
+      "rangeStrategy": "update-lockfile"
+    },
+    {
       "matchPaths": [
         "BuildTools/**"
       ],
