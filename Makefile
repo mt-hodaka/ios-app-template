@@ -26,16 +26,9 @@ bootstrap: install_gems install_build_tools resolve_dependencies
 clean: clean_build_artifacts clean_derived_data clean_dependencies clean_build_tools clean_gems
 
 install_gems:
-ifndef CI
-	rbenv install --skip-existing $(shell cat ./.ruby-version)
-	rbenv exec gem install bundler
-endif
 	bundle check || bundle install
 
 update_gems:
-ifndef CI
-	rbenv exec gem update bundler
-endif
 	bundle update --bundler
 	bundle update
 
