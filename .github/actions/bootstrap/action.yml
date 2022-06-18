@@ -8,8 +8,8 @@ runs:
       id: cache-build-tools
       uses: actions/cache@v3
       with:
-        path: BuildTools/**/.build
-        key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version', 'BuildTools/**/Package.resolved') }}
+        path: .mint
+        key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version', 'Mintfile') }}
 
     - name: Cache Swift Packages
       uses: actions/cache@v3
@@ -23,6 +23,7 @@ runs:
         bundler-cache: true
 
     - name: Prepare Build Tools
-      if: steps.cache-build-tools.outputs.cache-hit != 'true'
-      run: make install_build_tools
+      run: |
+        brew install mint
+        make install_build_tools
       shell: bash
