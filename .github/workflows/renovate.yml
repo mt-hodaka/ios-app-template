@@ -2,13 +2,12 @@ name: Renovate
 
 on:
   pull_request:
-    branches:
-      - 'renovate/**'
     paths:
       - '**/Package.swift'
 
 jobs:
   resolve_package_dependencies:
+    if: ${{ startsWith(github.head_ref, 'renovate/') }}
     runs-on: macos-12
     timeout-minutes: 5
     env:
@@ -31,7 +30,7 @@ jobs:
         continue-on-error: true
 
       - name: Commit and Push
-        if: steps.diff.outcome == 'failure'
+        if: ${{ steps.diff.outcome == 'failure' }}
         run: |
           set -x
           git config user.name github-actions[bot]
