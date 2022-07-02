@@ -1,0 +1,41 @@
+name: Renovate
+
+on:
+  pull_request:
+    branches:
+      - 'renovate/**'
+    paths:
+      - '**/Package.swift'
+
+jobs:
+  resolve_package_dependencies:
+    runs-on: macos-12
+    timeout-minutes: 5
+    env:
+      SLACK_URL: ${{ secrets.SLACK_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Bootstrap
+        uses: ./.github/actions/bootstrap
+
+      - name: Resolve Package Dependencies
+        run: make resolve_dependencies
+
+      - name: Diff
+        id: diff
+        run: git diff --exit-code **/Package.resolved
+        continue-on-error: true
+
+      - name: Commit and Push
+        if: steps.diff.outcome == 'failure'
+        run: |
+          set -x
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add **/Package.resolved
+          git commit --author=. -m 'chore(deps): resolve package dependencies'
+          git push
