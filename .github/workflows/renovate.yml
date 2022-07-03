@@ -14,9 +14,17 @@ jobs:
     env:
       SLACK_URL: ${{ secrets.SLACK_URL }}
     steps:
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.GH_APP_APP_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
+          token: ${{ steps.generate_token.outputs.token }}
           ref: ${{ github.head_ref }}
 
       - name: Bootstrap
