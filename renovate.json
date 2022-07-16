@@ -3,7 +3,7 @@
   "extends": [
     "config:base",
     "group:allNonMajor",
-    "schedule:earlyMondays"
+    "schedule:weekends"
   ],
   "timezone": "Asia/Tokyo",
   "prHourlyLimit": 0,
