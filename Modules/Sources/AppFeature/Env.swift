@@ -1,9 +1,5 @@
 import Foundation
 
-public class Env: ObservableObject {
-    @Published var message: String
-
-    public init(message: String) {
-        self.message = message
-    }
+public protocol Env {
+    static var envName: String { get }
 }

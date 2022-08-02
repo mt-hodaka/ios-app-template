@@ -1,7 +1,7 @@
 import AppFeature
 
-extension AppFeature.Env {
-    convenience init() {
-        self.init(message: "Production App!")
+enum Env: AppFeature.Env {
+    static var envName: String {
+        "Production"
     }
 }
