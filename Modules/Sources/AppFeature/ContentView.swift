@@ -2,14 +2,15 @@ import FirebaseAnalytics
 import SwiftUI
 
 public struct ContentView: View {
-    @EnvironmentObject var env: Env
+    @State private var envName: String
 
-    public init() {
+    public init(envName: String) {
+        self.envName = envName
     }
 
     public var body: some View {
         VStack(spacing: 10.0) {
-            Text(env.message)
+            Text("\(envName) App!")
             Button("Log event") {
                 Analytics.logEvent("Test log event", parameters: nil)
             }
@@ -22,7 +23,6 @@ public struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(Env(message: "Preview App!"))
+        ContentView(envName: "Preview")
     }
 }
