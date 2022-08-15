@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -78,22 +78,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6A84D6F3281C1E9300A0A651 /* AppStg.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = AppStg.xcconfig; sourceTree = "<group>"; };
+		6A84D6F3281C1E9300A0A651 /* App.stg.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = App.stg.xcconfig; sourceTree = "<group>"; };
 		6A84D6F5281C1E9300A0A651 /* env.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = env.swift; sourceTree = "<group>"; };
 		6A84D6F6281C1E9300A0A651 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A84D6F7281C1E9300A0A651 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6A84D6F9281C1E9300A0A651 /* AppProd.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = AppProd.xcconfig; sourceTree = "<group>"; };
+		6A84D6F9281C1E9300A0A651 /* App.prod.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = App.prod.xcconfig; sourceTree = "<group>"; };
 		6A84D6FB281C1E9300A0A651 /* env.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = env.swift; sourceTree = "<group>"; };
 		6A84D6FC281C1E9300A0A651 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A84D6FD281C1E9300A0A651 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A84D71B281C244700A0A651 /* ios-app-template.stg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app-template.stg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A86CED828380A670013354F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A520955B26B3E9280093E5A4 /* AppBase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppBase.xcconfig; sourceTree = "<group>"; };
+		A520955B26B3E9280093E5A4 /* App.base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = App.base.xcconfig; sourceTree = "<group>"; };
 		A52550422695E3B8004D3750 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A575E5152899967800D1AB65 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		A592C04726B401850019832F /* ProjectBase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectBase.xcconfig; sourceTree = "<group>"; };
-		A592C04826B401980019832F /* ProjectDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectDebug.xcconfig; sourceTree = "<group>"; };
-		A592C04926B401A20019832F /* ProjectRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ProjectRelease.xcconfig; sourceTree = "<group>"; };
+		A592C04726B401850019832F /* Project.Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Base.xcconfig; sourceTree = "<group>"; };
+		A592C04826B401980019832F /* Project.Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Debug.xcconfig; sourceTree = "<group>"; };
+		A592C04926B401A20019832F /* Project.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Release.xcconfig; sourceTree = "<group>"; };
 		A5EB40262657DCCB00825B30 /* ios-app-template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app-template.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5EB402D2657DCCD00825B30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,12 +188,12 @@
 		A5ECDB0026B40F6B00A122C4 /* xcconfigs */ = {
 			isa = PBXGroup;
 			children = (
-				A592C04726B401850019832F /* ProjectBase.xcconfig */,
-				A592C04826B401980019832F /* ProjectDebug.xcconfig */,
-				A592C04926B401A20019832F /* ProjectRelease.xcconfig */,
-				A520955B26B3E9280093E5A4 /* AppBase.xcconfig */,
-				6A84D6F9281C1E9300A0A651 /* AppProd.xcconfig */,
-				6A84D6F3281C1E9300A0A651 /* AppStg.xcconfig */,
+				A592C04726B401850019832F /* Project.Base.xcconfig */,
+				A592C04826B401980019832F /* Project.Debug.xcconfig */,
+				A592C04926B401A20019832F /* Project.Release.xcconfig */,
+				A520955B26B3E9280093E5A4 /* App.base.xcconfig */,
+				6A84D6F9281C1E9300A0A651 /* App.prod.xcconfig */,
+				6A84D6F3281C1E9300A0A651 /* App.stg.xcconfig */,
 			);
 			path = xcconfigs;
 			sourceTree = "<group>";
@@ -314,6 +314,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		6A84D717281C244700A0A651 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -334,6 +335,7 @@
 		};
 		A53BD20E2696190400F31861 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -354,6 +356,7 @@
 		};
 		A59FBC4E26B5AF1800C4BD0C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -371,6 +374,7 @@
 		};
 		A59FBC4F26B5AF2500C4BD0C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -435,14 +439,14 @@
 /* Begin XCBuildConfiguration section */
 		6A84D719281C244700A0A651 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A84D6F3281C1E9300A0A651 /* AppStg.xcconfig */;
+			baseConfigurationReference = 6A84D6F3281C1E9300A0A651 /* App.stg.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		6A84D71A281C244700A0A651 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A84D6F3281C1E9300A0A651 /* AppStg.xcconfig */;
+			baseConfigurationReference = 6A84D6F3281C1E9300A0A651 /* App.stg.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
@@ -485,28 +489,28 @@
 		};
 		A5EB40332657DCCD00825B30 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A592C04826B401980019832F /* ProjectDebug.xcconfig */;
+			baseConfigurationReference = A592C04826B401980019832F /* Project.Debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		A5EB40342657DCCD00825B30 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A592C04926B401A20019832F /* ProjectRelease.xcconfig */;
+			baseConfigurationReference = A592C04926B401A20019832F /* Project.Release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		A5EB40362657DCCD00825B30 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A84D6F9281C1E9300A0A651 /* AppProd.xcconfig */;
+			baseConfigurationReference = 6A84D6F9281C1E9300A0A651 /* App.prod.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		A5EB40372657DCCD00825B30 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A84D6F9281C1E9300A0A651 /* AppProd.xcconfig */;
+			baseConfigurationReference = 6A84D6F9281C1E9300A0A651 /* App.prod.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
