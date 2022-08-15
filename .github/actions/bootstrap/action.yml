@@ -9,7 +9,9 @@ runs:
       uses: actions/cache@v3
       with:
         path: .mint
-        key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version', 'Mintfile') }}
+        key: ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version') }}-${{ hashFiles('Mintfile') }}
+        restore-keys: |
+          ${{ runner.os }}-build-tools-${{ hashFiles('.xcode-version') }}-
 
     - name: Cache Swift Packages
       uses: actions/cache@v3
