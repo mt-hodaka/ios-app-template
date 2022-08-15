@@ -5,6 +5,7 @@ import PackageDescription
 
 var package = Package(
     name: "Modules",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v15),
     ],
@@ -15,22 +16,46 @@ var package = Package(
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "9.4.1"),
     ],
     targets: [
-        // MARK: - AppFeature
+        // MARK: AppFeature
+
         .target(
             name: "AppFeature",
             dependencies: [
                 .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
                 .product(name: "FirebasePerformance", package: "firebase-ios-sdk"),
+                "UIComponents",
             ],
             linkerSettings: [
                 // https://firebase.google.com/docs/ios/installation-methods#integrate-manually
                 .unsafeFlags(["-ObjC"]),
             ]),
+
         .testTarget(
             name: "AppFeatureTests",
             dependencies: [
                 "AppFeature",
+            ]),
+
+        // MARK: UIComponents
+
+        .target(
+            name: "UIComponents",
+            dependencies: [
+                "Resources",
+            ]),
+
+        // MARK: Resources
+
+        .target(
+            name: "Resources",
+            dependencies: [
+            ],
+            exclude: [
+                "swiftgen.yml",
+            ],
+            plugins: [
+                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
     ]
 )
