@@ -3,7 +3,7 @@
 
 import PackageDescription
 
-let package = Package(
+var package = Package(
     name: "Modules",
     platforms: [
         .iOS(.v15),
@@ -34,3 +34,9 @@ let package = Package(
             ]),
     ]
 )
+
+// MARK: - Plugins
+
+package.dependencies.append(contentsOf: [
+    .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.0"),
+])
