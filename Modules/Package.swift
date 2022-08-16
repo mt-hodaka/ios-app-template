@@ -3,7 +3,7 @@
 
 import PackageDescription
 
-var package = Package(
+let package = Package(
     name: "Modules",
     defaultLocalization: "en",
     platforms: [
@@ -13,7 +13,11 @@ var package = Package(
         .library(name: "AppFeature", targets: ["AppFeature"]),
     ],
     dependencies: [
+        // MARK: Dependencies
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "9.4.1"),
+
+        // MARK: Plugins
+        .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.0"),
     ],
     targets: [
         // MARK: AppFeature
@@ -59,9 +63,3 @@ var package = Package(
             ]),
     ]
 )
-
-// MARK: - Plugins
-
-package.dependencies.append(contentsOf: [
-    .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.0"),
-])
