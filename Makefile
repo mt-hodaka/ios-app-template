@@ -14,7 +14,6 @@ BUILDTOOLS_PACKAGE_PATHS = $(dir $(wildcard $(BUILDTOOLS_ROOT)/*/Package.swift))
 BUILDTOOLS_CONFIGURATION = release
 LICENSEPLIST = $(MINT_LINK_PATH)/license-plist
 SWIFTLINT = $(MINT_LINK_PATH)/swiftlint
-SWIFTGEN = $(MINT_LINK_PATH)/swiftgen
 
 APP_ROOT = ./App
 APP_NAME = ios-app-template
@@ -70,9 +69,6 @@ generate_license:
 		--output-path $(APP_ROOT)/iOS/Settings.bundle \
 		--package-path $(WORKSPACE)/xcshareddata/swiftpm/Package.resolved \
 		--fail-if-missing-license
-
-generate_code:
-	$(SWIFTGEN) --help || exit 0
 
 check:
 	$(FASTLANE) test \

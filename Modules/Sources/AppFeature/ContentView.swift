@@ -1,5 +1,6 @@
 import FirebaseAnalytics
 import SwiftUI
+import UIComponents
 
 public struct ContentView: View {
     @State private var envName: String
@@ -10,11 +11,22 @@ public struct ContentView: View {
 
     public var body: some View {
         VStack(spacing: 10.0) {
-            Text("\(envName) App!")
-            Button("Log event") {
+            Label {
+                Text(L10n.Sample.envNameTitle(envName))
+                    .font(.headline)
+            } icon: {
+                Asset.Images.sample.swiftUIImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 18.0)
+            }
+            .foregroundColor(Asset.Colors.sample.swiftUIColor)
+
+            Button(L10n.Sample.textLogEventButton) {
                 Analytics.logEvent("Test log event", parameters: nil)
             }
-            Button("Crash") {
+
+            Button(L10n.Sample.crashButton) {
                 fatalError()
             }
         }

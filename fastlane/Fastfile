@@ -30,10 +30,13 @@ platform :ios do
   end
 
   lane :test do |options|
+    xcargs = "-skipPackagePluginValidation" if is_ci?
+
     run_tests(
       workspace: options[:workspace],
       scheme: options[:scheme],
       cloned_source_packages_path: ENV["CLONED_SOURCE_PACKAGES_PATH"],
+      xcargs: xcargs,
       skip_slack: true
     )
   end
@@ -54,6 +57,7 @@ platform :ios do
 
       skip_codesigning = true
       export_team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+      xcargs = "-skipPackagePluginValidation"
     else
       xcargs = "-allowProvisioningUpdates"
       export_xcargs = "-allowProvisioningUpdates"

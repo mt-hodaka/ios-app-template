@@ -388,7 +388,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ${SRCROOT}/..\nmake generate_license\nmake generate_code\n";
+			shellScript = "cd ${SRCROOT}/..\nmake generate_license\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
