@@ -17,7 +17,7 @@ let package = Package(
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "9.4.1"),
 
         // MARK: Plugins
-        .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.0"),
+        .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.2"),
     ],
     targets: [
         // MARK: AppFeature
