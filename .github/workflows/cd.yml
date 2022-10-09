@@ -57,6 +57,7 @@ jobs:
       - name: Deploy
         run: make deploy_${{ matrix.scheme }}
         env:
+          LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
           TEAM_ID: ${{ secrets.TEAM_ID }}
