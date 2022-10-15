@@ -1,6 +1,7 @@
+import Core
 import SwiftUI
 
-public struct App<Env: AppFeature.Env>: SwiftUI.App {
+public struct App<Env: Core.Env>: SwiftUI.App {
     @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
 
     public init() {}
