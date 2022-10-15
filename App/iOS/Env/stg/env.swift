@@ -1,6 +1,6 @@
-import AppFeature
+import Core
 
-enum Env: AppFeature.Env {
+enum Env: Core.Env {
     static var envName: String {
         "Staging"
     }
