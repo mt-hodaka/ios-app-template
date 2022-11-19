@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
         // MARK: Dependencies
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.1.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.2.0"),
         .package(url: "https://github.com/apple/swift-collections.git", from: "1.0.3"),
         .package(url: "https://github.com/apple/swift-algorithms.git", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-async-algorithms.git", from: "0.0.3"),
