@@ -14,7 +14,10 @@ default_platform(:ios)
 
 platform :ios do
   before_all do |lane, options|
-    xcversion
+    xcodes(
+      binary_path: ENV["FL_XCODES_BINARY_PATH"], # work around: not work unless specified
+      select_for_current_build_only: true
+    )
   end
 
   lane :resolve_dependencies do |options|
