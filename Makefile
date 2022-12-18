@@ -65,6 +65,14 @@ lint:
 	$(SWIFTLINT) --fix --format
 	$(SWIFTLINT)
 
+update_swiftlint_opt_in_rules:
+	echo "opt_in_rules:" > ._swiftlint_opt_in_rules.yml
+	$(SWIFTLINT) rules \
+		| awk -F "|" '$$3 ~ "yes" && $$7 ~ "no" { if ($$5 ~ "no") { print "# -" $$2 "#" $$6 } else { print "  -" $$2 "#" $$6 } }' \
+		| sed 's/\s*$$//' \
+		>> ._swiftlint_opt_in_rules.yml
+	mv -f ._swiftlint_opt_in_rules.yml .swiftlint_opt_in_rules.yml
+
 generate_license:
 	$(LICENSEPLIST) \
 		--output-path $(APP_ROOT)/iOS/Settings.bundle \
