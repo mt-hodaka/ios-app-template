@@ -5,7 +5,7 @@ export MINT_LINK_PATH = ./.mint/bin
 
 ifdef CI
 export FASTLANE_HIDE_TIMESTAMP = true
-export CLONED_SOURCE_PACKAGES_PATH = ./SourcePackages
+export DERIVED_DATA_PATH = ./DerivedData
 endif
 
 FASTLANE = bundle exec fastlane
@@ -44,9 +44,16 @@ clean_mint:
 	rm -rf $(MINT_LINK_PATH)
 
 resolve_package_dependencies:
+ifdef DERIVED_DATA_PATH
+	xcodebuild -resolvePackageDependencies \
+		-workspace $(WORKSPACE) \
+		-scheme $(firstword $(SCHEMES)) \
+		-derivedDataPath $(DERIVED_DATA_PATH)
+else
 	xcodebuild -resolvePackageDependencies \
 		-workspace $(WORKSPACE) \
 		-scheme $(firstword $(SCHEMES))
+endif
 
 lint:
 	$(SWIFTLINT) --fix --format
