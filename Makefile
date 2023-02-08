@@ -35,7 +35,10 @@ update_gems:
 	bundle update
 
 clean_gems:
-	rm -rf ./vendor/bundle
+	$(eval $(shell bundle config get path --parseable))
+	$(eval $(shell bundle config get bin --parseable))
+	rm -rf $(path)
+	rm -rf $(bin)
 
 install_build_tools:
 	mint bootstrap --link --verbose
