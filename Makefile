@@ -2,7 +2,6 @@ export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = 60
 export FASTLANE_XCODEBUILD_SETTINGS_RETRIES = 1
 export MINT_PATH = ./.mint/lib
 export MINT_LINK_PATH = ./.mint/bin
-export FL_XCODES_BINARY_PATH = $(MINT_LINK_PATH)/xcodes
 
 ifdef CI
 export FASTLANE_HIDE_TIMESTAMP = true
@@ -10,9 +9,6 @@ export CLONED_SOURCE_PACKAGES_PATH = ./SourcePackages
 endif
 
 FASTLANE = bundle exec fastlane
-BUILDTOOLS_ROOT = ./BuildTools
-BUILDTOOLS_PACKAGE_PATHS = $(dir $(wildcard $(BUILDTOOLS_ROOT)/*/Package.swift))
-BUILDTOOLS_CONFIGURATION = release
 LICENSEPLIST = $(MINT_LINK_PATH)/license-plist
 SWIFTLINT = $(MINT_LINK_PATH)/swiftlint
 
@@ -23,46 +19,34 @@ PROJECT = $(APP_ROOT)/$(APP_NAME).xcodeproj
 SCHEMES = $(basename $(notdir $(wildcard $(PROJECT)/xcshareddata/xcschemes/*.xcscheme)))
 INFO_PLIST_FILE_PATHS = $(wildcard $(APP_ROOT)/iOS/Env/*/Info.plist)
 
-bootstrap: install_gems install_build_tools resolve_dependencies
+bootstrap: bundle_install mint_install resolve_package_dependencies
 
-clean: clean_build_artifacts clean_derived_data clean_dependencies clean_build_tools clean_gems
+clean: clean_build_artifacts clean_derived_data clean_dependencies clean_mint clean_bundle
 
-install_gems:
+bundle_install:
 	bundle check || bundle install
 
 update_gems:
 	bundle update --bundler
 	bundle update
 
-clean_gems:
+clean_bundle:
 	$(eval $(shell bundle config get path --parseable))
 	$(eval $(shell bundle config get bin --parseable))
 	rm -rf $(path)
 	rm -rf $(bin)
 
-install_build_tools:
+mint_install:
 	mint bootstrap --link --verbose
 
-clean_build_tools:
+clean_mint:
 	rm -rf $(MINT_PATH)
 	rm -rf $(MINT_LINK_PATH)
 
-resolve_dependencies:
-	$(FASTLANE) resolve_dependencies \
-		workspace:$(WORKSPACE) \
-		scheme:$(firstword $(SCHEMES))
-
-update_dependencies: clean_dependencies
-	rm $(WORKSPACE)/xcshareddata/swiftpm/Package.resolved
-	@$(MAKE) resolve_dependencies
-	@$(MAKE) generate_license
-
-clean_dependencies:
-ifdef CLONED_SOURCE_PACKAGES_PATH
-	rm -rf $(CLONED_SOURCE_PACKAGES_PATH)
-else
-	rm -rf ~/Library/Developer/Xcode/DerivedData/$(APP_NAME)-*/SourcePackages
-endif
+resolve_package_dependencies:
+	xcodebuild -resolvePackageDependencies \
+		-workspace $(WORKSPACE) \
+		-scheme $(firstword $(SCHEMES))
 
 lint:
 	$(SWIFTLINT) --fix --format
@@ -87,7 +71,7 @@ check:
 		workspace:$(WORKSPACE) \
 		scheme:$(firstword $(SCHEMES))
 
-report_coverage:
+report:
 	bash -c "bash <(curl -s https://codecov.io/bash) -J $(APP_NAME) -c"
 
 define DEPLOY
@@ -111,6 +95,13 @@ clean_build_artifacts:
 	rm -rf $(APP_ROOT)/iOS/Settings.bundle/com.mono0926.LicensePlist*
 	rm -rf ./*.app.dSYM.zip
 	rm -rf ./*.ipa
+
+clean_xcode_previews_cache:
+	xcrun simctl --set previews delete all
+
+clean_swiftpm_cache:
+	rm -rf ~/Library/Caches/org.swift.swiftpm
+	rm -rf ~/Library/org.swift.swiftpm
 
 current_version:
 	$(FASTLANE) current_version \

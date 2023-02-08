@@ -43,6 +43,6 @@ jobs:
           LICENSE_PLIST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Report Coverage
-        run: make report_coverage
+        run: make report
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
