@@ -16,8 +16,8 @@ APP_ROOT = ./App
 APP_NAME = ios-app-template
 WORKSPACE = ./$(APP_NAME).xcworkspace
 PROJECT = $(APP_ROOT)/$(APP_NAME).xcodeproj
+PROJECT_BASE_XCCONFIG = $(APP_ROOT)/xcconfigs/Project.base.xcconfig
 SCHEMES = $(basename $(notdir $(wildcard $(PROJECT)/xcshareddata/xcschemes/*.xcscheme)))
-INFO_PLIST_FILE_PATHS = $(wildcard $(APP_ROOT)/iOS/Env/*/Info.plist)
 
 bootstrap: bundle_install mint_install resolve_package_dependencies
 
@@ -103,30 +103,14 @@ clean_swiftpm_cache:
 	rm -rf ~/Library/Caches/org.swift.swiftpm
 	rm -rf ~/Library/org.swift.swiftpm
 
-current_version:
-	$(FASTLANE) current_version \
-		info_plist_path:$(firstword $(INFO_PLIST_FILE_PATHS))
-
 bump_version_number:
-ifdef VERSION_NUMBER
-	$(FASTLANE) bump_version_number \
-		info_plist_paths:"$(INFO_PLIST_FILE_PATHS)" \
-		version_number:$(VERSION_NUMBER)
-else
-	$(FASTLANE) bump_version_number \
-		info_plist_paths:"$(INFO_PLIST_FILE_PATHS)"
-endif
+	$(FASTLANE) update_version_number \
+		xcconfig_path:$(PROJECT_BASE_XCCONFIG)
 
 bump_build_number:
-ifdef BUILD_NUMBER
-	$(FASTLANE) bump_build_number \
-		info_plist_paths:"$(INFO_PLIST_FILE_PATHS)" \
-		build_number:$(BUILD_NUMBER)
-else
-	$(FASTLANE) bump_build_number \
-		info_plist_paths:"$(INFO_PLIST_FILE_PATHS)" \
+	$(FASTLANE) update_build_number \
+		xcconfig_path:$(PROJECT_BASE_XCCONFIG) \
 		build_number:$(shell git rev-list HEAD --merges | wc -l | tr -d ' ')
-endif
 
 get_commit_hash_at_build_number:
 	git rev-list HEAD --merges | tail -r | sed -n $(BUILD_NUMBER)p

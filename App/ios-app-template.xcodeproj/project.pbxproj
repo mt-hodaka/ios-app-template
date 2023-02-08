@@ -91,9 +91,9 @@
 		A520955B26B3E9280093E5A4 /* App.base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = App.base.xcconfig; sourceTree = "<group>"; };
 		A52550422695E3B8004D3750 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A575E5152899967800D1AB65 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		A592C04726B401850019832F /* Project.Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Base.xcconfig; sourceTree = "<group>"; };
-		A592C04826B401980019832F /* Project.Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Debug.xcconfig; sourceTree = "<group>"; };
-		A592C04926B401A20019832F /* Project.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Release.xcconfig; sourceTree = "<group>"; };
+		A592C04726B401850019832F /* Project.base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.base.xcconfig; sourceTree = "<group>"; };
+		A592C04826B401980019832F /* Project.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.debug.xcconfig; sourceTree = "<group>"; };
+		A592C04926B401A20019832F /* Project.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.release.xcconfig; sourceTree = "<group>"; };
 		A5EB40262657DCCB00825B30 /* ios-app-template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app-template.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5EB402D2657DCCD00825B30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,13 +118,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6A84D6F1281C1E9300A0A651 /* Env */ = {
+		6A84D6F1281C1E9300A0A651 /* env */ = {
 			isa = PBXGroup;
 			children = (
 				6A84D6F8281C1E9300A0A651 /* prod */,
 				6A84D6F2281C1E9300A0A651 /* stg */,
 			);
-			path = Env;
+			path = env;
 			sourceTree = "<group>";
 		};
 		6A84D6F2281C1E9300A0A651 /* stg */ = {
@@ -173,7 +173,7 @@
 			children = (
 				A575E5152899967800D1AB65 /* main.swift */,
 				A52550422695E3B8004D3750 /* Settings.bundle */,
-				6A84D6F1281C1E9300A0A651 /* Env */,
+				6A84D6F1281C1E9300A0A651 /* env */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -188,9 +188,9 @@
 		A5ECDB0026B40F6B00A122C4 /* xcconfigs */ = {
 			isa = PBXGroup;
 			children = (
-				A592C04726B401850019832F /* Project.Base.xcconfig */,
-				A592C04826B401980019832F /* Project.Debug.xcconfig */,
-				A592C04926B401A20019832F /* Project.Release.xcconfig */,
+				A592C04726B401850019832F /* Project.base.xcconfig */,
+				A592C04826B401980019832F /* Project.debug.xcconfig */,
+				A592C04926B401A20019832F /* Project.release.xcconfig */,
 				A520955B26B3E9280093E5A4 /* App.base.xcconfig */,
 				6A84D6F9281C1E9300A0A651 /* App.prod.xcconfig */,
 				6A84D6F3281C1E9300A0A651 /* App.stg.xcconfig */,
@@ -489,14 +489,14 @@
 		};
 		A5EB40332657DCCD00825B30 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A592C04826B401980019832F /* Project.Debug.xcconfig */;
+			baseConfigurationReference = A592C04826B401980019832F /* Project.debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		A5EB40342657DCCD00825B30 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A592C04926B401A20019832F /* Project.Release.xcconfig */;
+			baseConfigurationReference = A592C04926B401A20019832F /* Project.release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;

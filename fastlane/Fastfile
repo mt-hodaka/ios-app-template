@@ -69,40 +69,27 @@ platform :ios do
     )
   end
 
-  lane :current_version do |options|
-    version_number = version_number(info_plist_path: options[:info_plist_path])
-    build_number = build_number(info_plist_path: options[:info_plist_path])
-    UI.success "#{version_number} (#{build_number})"
+  lane :update_version_number do |options|
+    current = get_xcconfig_value(
+      path: options[:xcconfig_path],
+      name: "MARKETING_VERSION"
+    )
+
+    version = UI.input("Please enter new version (current is #{current}): ")
+
+    update_xcconfig_value(
+      path: options[:xcconfig_path],
+      name: "MARKETING_VERSION",
+      value: version
+    )
   end
 
-  lane :bump_version_number do |options|
-    info_plist_paths = options[:info_plist_paths].split(" ")
-    current_version_number = version_number(info_plist_path: info_plist_paths[0])
-    new_version_number = options[:version_number] || UI.input("Please enter new version number (current is #{current_version_number}):")
-
-    info_plist_paths.each do |path|
-      set_info_plist_value(
-        path: path,
-        key: "CFBundleShortVersionString",
-        value: new_version_number
-      )
-    end
-
-    current_version(info_plist_path: info_plist_paths[0])
-  end
-
-  lane :bump_build_number do |options|
-    info_plist_paths = options[:info_plist_paths].split(" ")
-
-    info_plist_paths.each do |path|
-      set_info_plist_value(
-        path: path,
-        key: "CFBundleVersion",
-        value: options[:build_number]
-      )
-    end
-
-    current_version(info_plist_path: info_plist_paths[0])
+  lane :update_build_number do |options|
+    update_xcconfig_value(
+      path: options[:xcconfig_path],
+      name: "CURRENT_PROJECT_VERSION",
+      value: options[:build_number]
+    )
   end
 
   after_all do |lane, options|
@@ -114,20 +101,6 @@ platform :ios do
     slack(
       message: exception.message,
       success: false
-    )
-  end
-
-  private_lane :version_number do |options|
-    get_info_plist_value(
-      path: options[:info_plist_path],
-      key: "CFBundleShortVersionString"
-    )
-  end
-
-  private_lane :build_number do |options|
-    get_info_plist_value(
-      path: options[:info_plist_path],
-      key: "CFBundleVersion"
     )
   end
 
