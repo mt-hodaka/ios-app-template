@@ -78,9 +78,6 @@ check:
 		workspace:$(WORKSPACE) \
 		scheme:$(firstword $(SCHEMES))
 
-report:
-	bash -c "bash <(curl -s https://codecov.io/bash) -J $(APP_NAME) -c"
-
 define DEPLOY
 deploy_$(1):
 	$(FASTLANE) deploy \
