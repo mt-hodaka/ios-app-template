@@ -1,4 +1,4 @@
-#include "./Project.Base.xcconfig"
+#include "./Project.base.xcconfig"
 
 VALIDATE_PRODUCT = YES
 ENABLE_NS_ASSERTIONS = NO

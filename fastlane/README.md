@@ -15,14 +15,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios resolve_dependencies
-
-```sh
-[bundle exec] fastlane ios resolve_dependencies
-```
-
-
-
 ### ios test
 
 ```sh
@@ -39,26 +31,18 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
-### ios current_version
+### ios update_version_number
 
 ```sh
-[bundle exec] fastlane ios current_version
+[bundle exec] fastlane ios update_version_number
 ```
 
 
 
-### ios bump_version_number
+### ios update_build_number
 
 ```sh
-[bundle exec] fastlane ios bump_version_number
-```
-
-
-
-### ios bump_build_number
-
-```sh
-[bundle exec] fastlane ios bump_build_number
+[bundle exec] fastlane ios update_build_number
 ```
 
 

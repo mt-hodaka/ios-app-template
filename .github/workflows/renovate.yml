@@ -31,7 +31,7 @@ jobs:
         uses: ./.github/actions/bootstrap
 
       - name: Resolve Package Dependencies
-        run: make resolve_dependencies
+        run: make resolve_package_dependencies
 
       - name: Diff
         id: diff

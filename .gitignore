@@ -98,6 +98,7 @@ com.mono0926.LicensePlist.plist
 # bundler
 
 vendor/bundle/
+vendor/bin/
 
 # mint
 

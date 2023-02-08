@@ -4,8 +4,7 @@ description: 'Set up build requirements'
 runs:
   using: 'composite'
   steps:
-    - name: Cache Build Tools
-      id: cache-build-tools
+    - name: Cache Mint
       uses: actions/cache@v3
       with:
         path: .mint
@@ -24,8 +23,8 @@ runs:
       with:
         bundler-cache: true
 
-    - name: Prepare Build Tools
+    - name: Prepare Mint
       run: |
         brew install mint
-        make install_build_tools
+        make mint_install
       shell: bash
