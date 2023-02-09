@@ -47,4 +47,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           xcode: true
-          xcode_archive_path: ./fastlane/test_output/*.xcresult
+          xcode_archive_path: ./fastlane/test_output/ios-app-template.stg.xcresult
