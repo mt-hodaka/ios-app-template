@@ -26,7 +26,7 @@ platform :ios do
     run_tests(
       workspace: options[:workspace],
       scheme: options[:scheme],
-      cloned_source_packages_path: ENV["CLONED_SOURCE_PACKAGES_PATH"],
+      derived_data_path: ENV["DERIVED_DATA_PATH"],
       xcargs: xcargs,
       skip_slack: true
     )
@@ -57,7 +57,7 @@ platform :ios do
     build_app(
       workspace: options[:workspace],
       scheme: options[:scheme],
-      cloned_source_packages_path: ENV["CLONED_SOURCE_PACKAGES_PATH"],
+      derived_data_path: ENV["DERIVED_DATA_PATH"],
       skip_codesigning: skip_codesigning,
       export_team_id: export_team_id,
       xcargs: xcargs,
@@ -106,7 +106,7 @@ platform :ios do
 
   private_lane :get_build_setting do |options|
     xcargs = ["-showBuildSettings"]
-    xcargs.concat ["-clonedSourcePackagesDirPath", ENV["CLONED_SOURCE_PACKAGES_PATH"]] unless ENV["CLONED_SOURCE_PACKAGES_PATH"].nil?
+    xcargs.concat ["-derivedDataPath", ENV["DERIVED_DATA_PATH"]] unless ENV["DERIVED_DATA_PATH"].nil?
 
     build_settings = xcodebuild(
       workspace: options[:workspace],
