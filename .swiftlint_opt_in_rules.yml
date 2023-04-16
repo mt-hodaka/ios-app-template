@@ -17,6 +17,7 @@ opt_in_rules:
   - contains_over_first_not_nil              # performance
   - contains_over_range_nil_comparison       # performance
   - convenience_type                         # idiomatic
+  - direct_return                            # style
   - discarded_notification_center_observer   # lint
   - discouraged_assert                       # idiomatic
   - discouraged_none_name                    # idiomatic
@@ -50,6 +51,7 @@ opt_in_rules:
   - implicit_return                          # style
 # - implicitly_unwrapped_optional            # idiomatic
 # - indentation_width                        # style
+# - inert_defer                              # lint
   - joined_default_parameter                 # idiomatic
   - last_where                               # performance
   - legacy_multiple                          # idiomatic
@@ -79,6 +81,7 @@ opt_in_rules:
   - overridden_super_call                    # lint
   - override_in_extension                    # lint
   - pattern_matching_keywords                # idiomatic
+  - period_spacing                           # style
 # - prefer_nimble                            # idiomatic
   - prefer_self_in_static_references         # style
   - prefer_self_type_over_type_of_self       # style
@@ -116,6 +119,7 @@ opt_in_rules:
   - unneeded_parentheses_in_closure_argument # style
 # - unowned_variable_capture                 # lint
   - untyped_error_in_catch                   # idiomatic
+# - unused_capture_list                      # lint
   - vertical_parameter_alignment_on_call     # style
 # - vertical_whitespace_between_cases        # style
   - vertical_whitespace_closing_braces       # style
