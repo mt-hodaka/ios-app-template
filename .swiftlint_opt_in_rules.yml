@@ -98,6 +98,7 @@ opt_in_rules:
   - raw_value_for_camel_cased_codable_enum   # lint
   - reduce_into                              # performance
   - redundant_nil_coalescing                 # idiomatic
+  - redundant_self_in_closure                # style
   - redundant_type_annotation                # idiomatic
 # - required_deinit                          # lint
 # - required_enum_case                       # lint
@@ -105,17 +106,20 @@ opt_in_rules:
   - self_binding                             # style
   - shorthand_optional_binding               # idiomatic
   - single_test_class                        # style
+# - sorted_enum_cases                        # style
   - sorted_first_last                        # performance
   - sorted_imports                           # style
   - static_operator                          # idiomatic
 # - strict_fileprivate                       # idiomatic
 # - strong_iboutlet                          # lint
+  - superfluous_else                         # style
 # - switch_case_on_newline                   # style
   - test_case_accessibility                  # lint
   - toggle_bool                              # idiomatic
 # - trailing_closure                         # style
 # - type_contents_order                      # style
   - unavailable_function                     # idiomatic
+  - unhandled_throwing_task                  # lint
   - unneeded_parentheses_in_closure_argument # style
 # - unowned_variable_capture                 # lint
   - untyped_error_in_catch                   # idiomatic
