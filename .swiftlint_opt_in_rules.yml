@@ -2,7 +2,7 @@ opt_in_rules:
 # - accessibility_label_for_image            # lint
   - accessibility_trait_for_button           # lint
 # - anonymous_argument_in_multiline_closure  # idiomatic
-  - anyobject_protocol                       # lint
+# - anyobject_protocol                       # lint
   - array_init                               # lint
   - attributes                               # style
 # - balanced_xctest_lifecycle                # lint
