@@ -87,5 +87,7 @@ for target in package.targets {
     target.swiftSettings = (target.swiftSettings ?? []) + [
         .enableUpcomingFeature("BareSlashRegexLiterals"),
         .enableUpcomingFeature("ExistentialAny"),
+        .unsafeFlags(["-enable-actor-data-race-checks"], .when(configuration: .debug)),
+        .unsafeFlags(["-warn-concurrency"], .when(configuration: .debug)),
     ]
 }
