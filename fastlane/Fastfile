@@ -28,6 +28,7 @@ platform :ios do
       scheme: options[:scheme],
       derived_data_path: ENV["DERIVED_DATA_PATH"],
       xcargs: xcargs,
+      result_bundle: true,
       skip_slack: true
     )
   end

@@ -26,5 +26,5 @@ runs:
     - name: Prepare Mint
       run: |
         brew install mint
-        make mint_install
+        make mint_bootstrap
       shell: bash

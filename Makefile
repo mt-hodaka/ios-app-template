@@ -19,7 +19,7 @@ PROJECT = $(APP_ROOT)/$(APP_NAME).xcodeproj
 PROJECT_BASE_XCCONFIG = $(APP_ROOT)/xcconfigs/Project.base.xcconfig
 SCHEMES = $(basename $(notdir $(wildcard $(PROJECT)/xcshareddata/xcschemes/*.xcscheme)))
 
-bootstrap: bundle_install mint_install resolve_package_dependencies
+bootstrap: bundle_install mint_bootstrap resolve_package_dependencies
 
 clean: clean_build_artifacts clean_derived_data clean_dependencies clean_mint clean_bundle
 
@@ -36,7 +36,7 @@ clean_bundle:
 	rm -rf $(path)
 	rm -rf $(bin)
 
-mint_install:
+mint_bootstrap:
 	mint bootstrap --link --verbose
 
 clean_mint:
@@ -77,9 +77,6 @@ check:
 	$(FASTLANE) test \
 		workspace:$(WORKSPACE) \
 		scheme:$(firstword $(SCHEMES))
-
-report:
-	bash -c "bash <(curl -s https://codecov.io/bash) -J $(APP_NAME) -c"
 
 define DEPLOY
 deploy_$(1):
