@@ -11,7 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = A5D0682A2695773B00F7B052 /* Build configuration list for PBXAggregateTarget "Linter" */;
 			buildPhases = (
-				A59FBC4E26B5AF1800C4BD0C /* ShellScript */,
+				A59FBC4E26B5AF1800C4BD0C /* Lint */,
 			);
 			dependencies = (
 			);
@@ -22,7 +22,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = A5D0682F2695881F00F7B052 /* Build configuration list for PBXAggregateTarget "Generator" */;
 			buildPhases = (
-				A59FBC4F26B5AF2500C4BD0C /* ShellScript */,
+				A59FBC4F26B5AF2500C4BD0C /* Generate License */,
 			);
 			dependencies = (
 			);
@@ -253,8 +253,9 @@
 		A5EB401E2657DCCB00825B30 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					A5D068272695773B00F7B052 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -354,7 +355,7 @@
 			shellPath = /bin/sh;
 			shellScript = "${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
 		};
-		A59FBC4E26B5AF1800C4BD0C /* ShellScript */ = {
+		A59FBC4E26B5AF1800C4BD0C /* Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -364,6 +365,7 @@
 			);
 			inputPaths = (
 			);
+			name = Lint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -372,7 +374,7 @@
 			shellPath = /bin/sh;
 			shellScript = "cd ${SRCROOT}/..\nmake lint\n";
 		};
-		A59FBC4F26B5AF2500C4BD0C /* ShellScript */ = {
+		A59FBC4F26B5AF2500C4BD0C /* Generate License */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -382,6 +384,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Generate License";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -454,8 +457,6 @@
 		A5D068282695773B00F7B052 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4NV8KK5CH4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -463,8 +464,6 @@
 		A5D068292695773B00F7B052 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4NV8KK5CH4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -472,8 +471,6 @@
 		A5D068302695881F00F7B052 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4NV8KK5CH4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -481,8 +478,6 @@
 		A5D068312695881F00F7B052 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4NV8KK5CH4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
