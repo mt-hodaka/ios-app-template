@@ -1,4 +1,4 @@
-// swift-tools-version: 5.6
+// swift-tools-version: 5.8
 
 import PackageDescription
 
@@ -82,3 +82,12 @@ let package = Package(
             ]),
     ]
 )
+
+for target in package.targets {
+    target.swiftSettings = (target.swiftSettings ?? []) + [
+        .enableUpcomingFeature("BareSlashRegexLiterals"),
+        .enableUpcomingFeature("ExistentialAny"),
+        .unsafeFlags(["-enable-actor-data-race-checks"], .when(configuration: .debug)),
+        .unsafeFlags(["-warn-concurrency"], .when(configuration: .debug)),
+    ]
+}
