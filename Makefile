@@ -1,3 +1,5 @@
+export XCODE_VERSION = $(shell cat ./.xcode-version)
+export DEVELOPER_DIR = $(wildcard /Applications/Xcode*$(XCODE_VERSION).app)
 export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = 60
 export FASTLANE_XCODEBUILD_SETTINGS_RETRIES = 1
 export MINT_PATH = ./.mint/lib
