@@ -1,5 +1,4 @@
-export XCODE_VERSION = $(shell cat ./.xcode-version)
-export DEVELOPER_DIR = $(wildcard /Applications/Xcode*$(XCODE_VERSION).app)
+export DEVELOPER_DIR = $(shell $(XCODES) installed $(XCODE_VERSION))
 export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = 60
 export FASTLANE_XCODEBUILD_SETTINGS_RETRIES = 1
 export MINT_PATH = ./.mint/lib
@@ -13,6 +12,8 @@ endif
 FASTLANE = bundle exec fastlane
 LICENSEPLIST = $(MINT_LINK_PATH)/license-plist
 SWIFTLINT = $(MINT_LINK_PATH)/swiftlint
+XCODES = $(MINT_LINK_PATH)/xcodes
+XCODE_VERSION = $(shell cat ./.xcode-version)
 
 APP_ROOT = ./App
 APP_NAME = ios-app-template
@@ -75,7 +76,6 @@ update_swiftlint_opt_in_rules:
 generate_license:
 	$(LICENSEPLIST) \
 		--output-path $(APP_ROOT)/iOS/Settings.bundle \
-		--package-path $(WORKSPACE)/xcshareddata/swiftpm/Package.resolved \
 		--fail-if-missing-license
 
 check:
