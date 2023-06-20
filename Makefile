@@ -25,6 +25,9 @@ bootstrap: bundle_install mint_bootstrap resolve_package_dependencies
 
 clean: clean_build_artifacts clean_derived_data clean_mint clean_bundle
 
+open: bootstrap
+	xed $(WORKSPACE)
+
 bundle_install:
 	bundle check || bundle install
 
