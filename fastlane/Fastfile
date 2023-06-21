@@ -20,13 +20,12 @@ platform :ios do
     workspace = options[:workspace]
     scheme = options[:scheme]
     derived_data_path = ENV["DERIVED_DATA_PATH"]
-    xcargs = "-skipPackagePluginValidation" if is_ci?
 
     run_tests(
       workspace: workspace,
       scheme: scheme,
       derived_data_path: derived_data_path,
-      xcargs: xcargs,
+      xcargs: "-skipPackagePluginValidation",
       result_bundle: true,
       skip_slack: true
     )
@@ -36,36 +35,28 @@ platform :ios do
     workspace = options[:workspace]
     scheme = options[:scheme]
     derived_data_path = ENV["DERIVED_DATA_PATH"]
+    team_id = ENV["TEAM_ID"]
 
     app_store_connect_api_key
 
-    if is_ci? then
-      bundle_id = get_build_setting(
-        workspace: workspace,
-        scheme: scheme,
-        build_setting_key: "PRODUCT_BUNDLE_IDENTIFIER"
-      )
+    export_xcargs = ["-allowProvisioningUpdates"]
 
-      retry_on_error do
-        get_provisioning_profile(app_identifier: bundle_id)
-      end
-
-      skip_codesigning = true
-      export_team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
-      xcargs = "-skipPackagePluginValidation"
-    else
-      xcargs = "-allowProvisioningUpdates"
-      export_xcargs = "-allowProvisioningUpdates"
+    if is_ci?
+      export_xcargs.concat [
+        "-authenticationKeyIssuerID", ENV["APP_STORE_CONNECT_API_KEY_ISSUER_ID"],
+        "-authenticationKeyID", ENV["APP_STORE_CONNECT_API_KEY_KEY_ID"],
+        "-authenticationKeyPath", ENV["APP_STORE_CONNECT_API_KEY_KEY_FILEPATH"],
+      ]
     end
 
     build_app(
       workspace: workspace,
       scheme: scheme,
       derived_data_path: derived_data_path,
-      skip_codesigning: skip_codesigning,
-      export_team_id: export_team_id,
-      xcargs: xcargs,
-      export_xcargs: export_xcargs
+      export_team_id: team_id,
+      skip_codesigning: true,
+      xcargs: "-skipPackagePluginValidation",
+      export_xcargs: export_xcargs.join(" ")
     )
 
     upload_to_testflight(
