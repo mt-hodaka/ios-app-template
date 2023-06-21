@@ -44,15 +44,12 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # fetch all history because bump build number does not work
-          ref: ${{ github.event.workflow_run.head_sha }}
 
       - name: Bootstrap
         uses: ./.github/actions/bootstrap
 
-      - name: Bump Build Number
-        run: make bump_build_number
+      - name: Set Build Number
+        run: make set_build_number BUILD_NUMBER=${GITHUB_RUN_NUMBER}
 
       - name: Deploy
         run: make deploy_${{ matrix.scheme }}

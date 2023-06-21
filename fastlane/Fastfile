@@ -17,12 +17,15 @@ platform :ios do
   end
 
   lane :test do |options|
+    workspace = options[:workspace]
+    scheme = options[:scheme]
+    derived_data_path = ENV["DERIVED_DATA_PATH"]
     xcargs = "-skipPackagePluginValidation" if is_ci?
 
     run_tests(
-      workspace: options[:workspace],
-      scheme: options[:scheme],
-      derived_data_path: ENV["DERIVED_DATA_PATH"],
+      workspace: workspace,
+      scheme: scheme,
+      derived_data_path: derived_data_path,
       xcargs: xcargs,
       result_bundle: true,
       skip_slack: true
@@ -30,12 +33,16 @@ platform :ios do
   end
 
   lane :deploy do |options|
+    workspace = options[:workspace]
+    scheme = options[:scheme]
+    derived_data_path = ENV["DERIVED_DATA_PATH"]
+
     app_store_connect_api_key
 
     if is_ci? then
       bundle_id = get_build_setting(
-        workspace: options[:workspace],
-        scheme: options[:scheme],
+        workspace: workspace,
+        scheme: scheme,
         build_setting_key: "PRODUCT_BUNDLE_IDENTIFIER"
       )
 
@@ -52,9 +59,9 @@ platform :ios do
     end
 
     build_app(
-      workspace: options[:workspace],
-      scheme: options[:scheme],
-      derived_data_path: ENV["DERIVED_DATA_PATH"],
+      workspace: workspace,
+      scheme: scheme,
+      derived_data_path: derived_data_path,
       skip_codesigning: skip_codesigning,
       export_team_id: export_team_id,
       xcargs: xcargs,
@@ -66,26 +73,43 @@ platform :ios do
     )
   end
 
-  lane :update_version_number do |options|
-    current = get_xcconfig_value(
-      path: options[:xcconfig_path],
-      name: "MARKETING_VERSION"
-    )
+  lane :set_version_number do |options|
+    xcconfig_path = options[:xcconfig_path]
+    version_number = options[:version_number]
 
-    version = UI.input("Please enter new version (current is #{current}): ")
+    if version_number.empty?
+      current = get_xcconfig_value(
+        path: xcconfig_path,
+        name: "MARKETING_VERSION"
+      )
+
+      version_number = UI.input("Please enter new version (current is #{current}): ")
+    end
 
     update_xcconfig_value(
-      path: options[:xcconfig_path],
+      path: xcconfig_path,
       name: "MARKETING_VERSION",
-      value: version
+      value: version_number
     )
   end
 
-  lane :update_build_number do |options|
+  lane :set_build_number do |options|
+    xcconfig_path = options[:xcconfig_path]
+    build_number = options[:build_number]
+
+    if build_number.empty?
+      current = get_xcconfig_value(
+        path: xcconfig_path,
+        name: "CURRENT_PROJECT_VERSION"
+      )
+
+      build_number = UI.input("Please enter new build number (current is #{current}): ")
+    end
+
     update_xcconfig_value(
-      path: options[:xcconfig_path],
+      path: xcconfig_path,
       name: "CURRENT_PROJECT_VERSION",
-      value: options[:build_number]
+      value: build_number
     )
   end
 
@@ -102,17 +126,20 @@ platform :ios do
   end
 
   private_lane :get_build_setting do |options|
+    workspace = options[:workspace]
+    scheme = options[:scheme]
+    build_setting_key = options[:build_setting_key]
     xcargs = ["-showBuildSettings"]
     xcargs.concat ["-derivedDataPath", ENV["DERIVED_DATA_PATH"]] unless ENV["DERIVED_DATA_PATH"].nil?
 
     build_settings = xcodebuild(
-      workspace: options[:workspace],
-      scheme: options[:scheme],
+      workspace: workspace,
+      scheme: scheme,
       xcargs: xcargs.join(" "),
       raw_buildlog: true
     )
 
-    /#{options[:build_setting_key]} = (.+)/.match(build_settings).to_a[1]
+    /#{build_setting_key} = (.+)/.match(build_settings).to_a[1]
   end
 
   def retry_on_error(times: 3)

@@ -31,18 +31,18 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
-### ios update_version_number
+### ios set_version_number
 
 ```sh
-[bundle exec] fastlane ios update_version_number
+[bundle exec] fastlane ios set_version_number
 ```
 
 
 
-### ios update_build_number
+### ios set_build_number
 
 ```sh
-[bundle exec] fastlane ios update_build_number
+[bundle exec] fastlane ios set_build_number
 ```
 
 
