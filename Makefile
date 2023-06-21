@@ -112,14 +112,12 @@ clean_swiftpm_cache:
 	rm -rf ~/Library/Caches/org.swift.swiftpm
 	rm -rf ~/Library/org.swift.swiftpm
 
-bump_version_number:
-	$(FASTLANE) update_version_number \
-		xcconfig_path:$(PROJECT_BASE_XCCONFIG)
-
-bump_build_number:
-	$(FASTLANE) update_build_number \
+set_version_number:
+	$(FASTLANE) set_version_number \
 		xcconfig_path:$(PROJECT_BASE_XCCONFIG) \
-		build_number:$(shell git rev-list HEAD --merges | wc -l | tr -d ' ')
+		version_number:$(VERSION_NUMBER)
 
-get_commit_hash_at_build_number:
-	git rev-list HEAD --merges | tail -r | sed -n $(BUILD_NUMBER)p
+set_build_number:
+	$(FASTLANE) set_build_number \
+		xcconfig_path:$(PROJECT_BASE_XCCONFIG) \
+		build_number:$(BUILD_NUMBER)
