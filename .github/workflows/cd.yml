@@ -8,13 +8,10 @@ on:
       - completed
     branches:
       - main
-  pull_request:
-    paths-ignore:
-      - README.md
-      - LICENSE
 
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: macos-13
     timeout-minutes: 60
     env:
