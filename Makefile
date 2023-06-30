@@ -22,12 +22,12 @@ PROJECT = $(APP_ROOT)/$(APP_NAME).xcodeproj
 PROJECT_BASE_XCCONFIG = $(APP_ROOT)/xcconfigs/Project.base.xcconfig
 SCHEMES = $(basename $(notdir $(wildcard $(PROJECT)/xcshareddata/xcschemes/*.xcscheme)))
 
+open: bootstrap
+	xed $(WORKSPACE)
+
 bootstrap: bundle_install mint_bootstrap resolve_package_dependencies
 
 clean: clean_build_artifacts clean_derived_data clean_mint clean_bundle
-
-open: bootstrap
-	xed $(WORKSPACE)
 
 bundle_install:
 	bundle check || bundle install
