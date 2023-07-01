@@ -115,32 +115,4 @@ platform :ios do
       success: false
     )
   end
-
-  private_lane :get_build_setting do |options|
-    workspace = options[:workspace]
-    scheme = options[:scheme]
-    build_setting_key = options[:build_setting_key]
-    xcargs = ["-showBuildSettings"]
-    xcargs.concat ["-derivedDataPath", ENV["DERIVED_DATA_PATH"]] unless ENV["DERIVED_DATA_PATH"].nil?
-
-    build_settings = xcodebuild(
-      workspace: workspace,
-      scheme: scheme,
-      xcargs: xcargs.join(" "),
-      raw_buildlog: true
-    )
-
-    /#{build_setting_key} = (.+)/.match(build_settings).to_a[1]
-  end
-
-  def retry_on_error(times: 3)
-    try = 0
-    begin
-      try += 1
-      yield
-    rescue
-      retry if try < times
-      raise
-    end
-  end
 end
