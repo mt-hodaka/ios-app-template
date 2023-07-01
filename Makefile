@@ -1,12 +1,13 @@
 export DEVELOPER_DIR = $(shell $(XCODES) installed $(XCODE_VERSION))
-export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = 60
 export FASTLANE_XCODEBUILD_SETTINGS_RETRIES = 1
-export MINT_PATH = ./.mint/lib
+export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = 60
 export MINT_LINK_PATH = ./.mint/bin
+export MINT_PATH = ./.mint/lib
 
 ifdef CI
-export FASTLANE_HIDE_TIMESTAMP = true
+export APP_STORE_CONNECT_API_KEY_KEY_FILEPATH = $(abspath ./.secrets/AuthKey_$(APP_STORE_CONNECT_API_KEY_KEY_ID).p8)
 export DERIVED_DATA_PATH = ./DerivedData
+export FASTLANE_HIDE_TIMESTAMP = true
 endif
 
 FASTLANE = bundle exec fastlane
@@ -83,8 +84,14 @@ check:
 		workspace:$(WORKSPACE) \
 		scheme:$(firstword $(SCHEMES))
 
+$(APP_STORE_CONNECT_API_KEY_KEY_FILEPATH):
+	echo "$${APP_STORE_CONNECT_API_KEY_KEY}" > $@
+
 define DEPLOY
 deploy_$(1):
+ifdef CI
+	$(MAKE) $(APP_STORE_CONNECT_API_KEY_KEY_FILEPATH)
+endif
 	$(FASTLANE) deploy \
 		workspace:$(WORKSPACE) \
 		scheme:$(1)
