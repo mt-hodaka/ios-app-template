@@ -44,7 +44,7 @@ clean_bundle:
 	rm -rf $(bin)
 
 mint_bootstrap:
-	mint bootstrap --link --verbose
+	mint bootstrap --link
 
 clean_mint:
 	rm -rf $(MINT_PATH)
