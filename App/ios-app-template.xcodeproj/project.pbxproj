@@ -94,6 +94,8 @@
 		A592C04726B401850019832F /* Project.base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.base.xcconfig; sourceTree = "<group>"; };
 		A592C04826B401980019832F /* Project.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.debug.xcconfig; sourceTree = "<group>"; };
 		A592C04926B401A20019832F /* Project.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.release.xcconfig; sourceTree = "<group>"; };
+		A5E4997D2A6A75FE001F4E2A /* iOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = iOS.entitlements; sourceTree = "<group>"; };
+		A5E4997E2A6A761A001F4E2A /* iOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = iOS.entitlements; sourceTree = "<group>"; };
 		A5EB40262657DCCB00825B30 /* ios-app-template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app-template.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5EB402D2657DCCD00825B30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +136,7 @@
 				6A84D6F5281C1E9300A0A651 /* env.swift */,
 				6A84D6F6281C1E9300A0A651 /* GoogleService-Info.plist */,
 				6A84D6F7281C1E9300A0A651 /* Info.plist */,
+				A5E4997E2A6A761A001F4E2A /* iOS.entitlements */,
 			);
 			path = stg;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 				6A84D6FB281C1E9300A0A651 /* env.swift */,
 				6A84D6FC281C1E9300A0A651 /* GoogleService-Info.plist */,
 				6A84D6FD281C1E9300A0A651 /* Info.plist */,
+				A5E4997D2A6A75FE001F4E2A /* iOS.entitlements */,
 			);
 			path = prod;
 			sourceTree = "<group>";
