@@ -69,7 +69,7 @@ opt_in_rules:
   - multiline_parameters                     # style
 # - multiline_parameters_brackets            # style
   - nimble_operator                          # idiomatic
-  - no_extension_access_modifier             # idiomatic
+# - no_extension_access_modifier             # idiomatic
 # - no_grouping_extension                    # idiomatic
 # - no_magic_numbers                         # idiomatic
   - nslocalizedstring_key                    # lint
