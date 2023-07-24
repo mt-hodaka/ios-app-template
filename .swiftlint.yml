@@ -16,10 +16,9 @@ disabled_rules:
   - file_length
   - function_body_length
   - generic_type_name
+  - identifier_name
   - line_length
   - type_body_length
-
-  - identifier_name
   - type_name
 
 trailing_comma:
