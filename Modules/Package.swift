@@ -13,10 +13,11 @@ let package = Package(
     ],
     dependencies: [
         // MARK: Dependencies
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.12.0"),
-        .package(url: "https://github.com/apple/swift-collections.git", from: "1.0.4"),
         .package(url: "https://github.com/apple/swift-algorithms.git", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-async-algorithms.git", from: "0.1.0"),
+        .package(url: "https://github.com/apple/swift-collections.git", from: "1.0.4"),
+        .package(url: "https://github.com/apple/swift-http-types.git", from: "0.1.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.12.0"),
 
         // MARK: Plugins
         .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.2"),
@@ -70,9 +71,10 @@ let package = Package(
         .target(
             name: "Core",
             dependencies: [
-                .product(name: "Collections", package: "swift-collections"),
                 .product(name: "Algorithms", package: "swift-algorithms"),
                 .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
+                .product(name: "Collections", package: "swift-collections"),
+                .product(name: "HTTPTypesFoundation", package: "swift-http-types"),
             ]),
 
         .testTarget(
