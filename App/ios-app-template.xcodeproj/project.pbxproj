@@ -88,6 +88,7 @@
 		6A84D6FD281C1E9300A0A651 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A84D71B281C244700A0A651 /* ios-app-template.stg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app-template.stg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A86CED828380A670013354F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6AC8F0052A9A8B6100946ED6 /* CrashlyticsInputFiles.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = CrashlyticsInputFiles.xcfilelist; sourceTree = "<group>"; };
 		A520955B26B3E9280093E5A4 /* App.base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = App.base.xcconfig; sourceTree = "<group>"; };
 		A52550422695E3B8004D3750 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A575E5152899967800D1AB65 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -178,6 +179,7 @@
 				A575E5152899967800D1AB65 /* main.swift */,
 				A52550422695E3B8004D3750 /* Settings.bundle */,
 				6A84D6F1281C1E9300A0A651 /* env */,
+				6AC8F0052A9A8B6100946ED6 /* CrashlyticsInputFiles.xcfilelist */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -324,12 +326,9 @@
 			files = (
 			);
 			inputFileListPaths = (
+				"$(SRCROOT)/iOS/CrashlyticsInputFiles.xcfilelist",
 			);
 			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
-				"$(BUILT_PRODUCTS_DIR)/$(EXECUTABLE_PATH)",
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 			);
 			name = Crashlytics;
 			outputFileListPaths = (
@@ -347,12 +346,9 @@
 			files = (
 			);
 			inputFileListPaths = (
+				"$(SRCROOT)/iOS/CrashlyticsInputFiles.xcfilelist",
 			);
 			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
-				"$(BUILT_PRODUCTS_DIR)/$(EXECUTABLE_PATH)",
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 			);
 			name = Crashlytics;
 			outputFileListPaths = (
