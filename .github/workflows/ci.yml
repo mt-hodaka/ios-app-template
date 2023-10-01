@@ -26,8 +26,9 @@ jobs:
 
       - name: SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1
-        env:
-          DIFF_BASE: ${{ github.base_ref }}
+        # workaround for https://github.com/norio-nomura/action-swiftlint/issues/43
+        # env:
+        #   DIFF_BASE: ${{ github.base_ref }}
 
   check:
     runs-on: macos-13
