@@ -17,7 +17,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-async-algorithms.git", from: "0.1.0"),
         .package(url: "https://github.com/apple/swift-collections.git", from: "1.0.5"),
         .package(url: "https://github.com/apple/swift-http-types.git", from: "1.0.0"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.16.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.17.0"),
 
         // MARK: Plugins
         .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.2"),
