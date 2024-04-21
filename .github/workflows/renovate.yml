@@ -9,7 +9,7 @@ on:
 
 jobs:
   resolve_package_dependencies:
-    runs-on: macos-13
+    runs-on: macos-14
     timeout-minutes: 30
     env:
       SLACK_URL: ${{ secrets.SLACK_URL }}
